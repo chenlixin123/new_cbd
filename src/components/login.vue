@@ -80,20 +80,19 @@ export default {
             .request({
               url: url.url.login,
               params: {
-                accountName: username,
-                password: password,
-                type: 1
+                username: username,
+                password: password
               },
-              method: "post"
+              method: "get"
             })
             .then(res => {
               console.log(res);
-              if (res.data.code == 200) {
+              if (res.data.login == true) {
                 this.$Notice.success({
                   title: "登录成功",
                   desc: ""
                 });
-                sessionStorage.setItem("data", res.data.data);
+                sessionStorage.setItem("data", res.data.token);
                 // sessionStorage.setItem("loging", "true");
                 axios
                   .request({
@@ -102,13 +101,13 @@ export default {
                   })
                   .then(res => {
                     console.log(res);
-                    if (res.data.code == 200) {
-                      sessionStorage.setItem("name", res.data.data.userName);
+                    if (res.status == 200) {
+                      sessionStorage.setItem("name", this.username);
                       sessionStorage.setItem(
                         "menuSet",
-                        JSON.stringify(res.data.data.menuSet)
+                        JSON.stringify(res.data)
                       );
-                      res.data.data.menuSet.map(item => {
+                      res.data.map(item => {
                         if (item == "car_administration") {
                           this.$router.push({
                             path: "/car_administration"

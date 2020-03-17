@@ -290,6 +290,9 @@
   margin-bottom: 15px;
   font-size: 0.8vw;
   border-bottom: 1px solid #e8eaec;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10%;
 }
 .center_modal {
   width: 100%;
@@ -503,7 +506,10 @@
     </div>
     <!-- 修改弹出框 -->
     <Modal v-model="modal11" :closable="false" :mask-closable="false">
-      <div class="title_modau">{{title_modau}}</div>
+      <div class="title_modau">
+        <div>{{title_modau}}</div>
+        <div>{{parkName}}</div>
+      </div>
       <div class="center_modal">
         <label for style="color:white;">*</label>
         <label for>剩余临停车位</label>：
@@ -540,6 +546,7 @@ import axios1 from "@/libs/api.request.json";
 export default {
   data() {
     return {
+      parkName: "",
       max_temp: "",
       max_fix: "",
       success_data: {
@@ -775,7 +782,7 @@ export default {
         {
           title: "操作",
           key: "id",
-          minWidth: 200,
+          minWidth: 250,
           align: "center",
           render: (h, params) => {
             let parking = params.row;
@@ -800,7 +807,7 @@ export default {
                     }
                   }
                 },
-                "可用车位修正"
+                "车位修正"
               ),
               h(
                 "span",
@@ -1145,6 +1152,7 @@ export default {
     //可用车位修正点击
     edit_number(data) {
       console.log(data);
+      this.parkName = data.parkName;
       this.max_temp = data.tempStallSum;
       this.max_fix = data.fixStallSum;
       this.success_data.freeTempStallSum = data.freeTempStallSum;

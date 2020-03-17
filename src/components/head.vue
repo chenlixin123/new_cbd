@@ -155,7 +155,7 @@ export default {
           })
           .then(res => {
             console.log(res);
-            if (res.data.code == 200) {
+            if (res.data.logout == true) {
               this.modal3 = false;
               sessionStorage.setItem("logout", 1);
               this.$router.replace({ path: "/" });
