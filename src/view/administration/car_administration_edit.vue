@@ -857,7 +857,7 @@ input:-ms-input-placeholder {
                     :before-upload="handleUpload"
                     :show-upload-list="false"
                     :on-success="uploadSuccess"
-                    action="/api/park/image_upload"
+                    action="/api/admin/park/image_upload"
                   >
                     <Button class="mansion_btn" size="small">浏览</Button>
                   </Upload>
@@ -1048,7 +1048,7 @@ input:-ms-input-placeholder {
                 :before-upload="handleUpload2"
                 :show-upload-list="false"
                 :on-success="uploadSuccess2"
-                action="/api/park/image_upload"
+                action="/api/admin/park/image_upload"
               >
                 <Button class="mansion_btn" size="small" @click="watchs(index)">浏览</Button>
               </Upload>
@@ -1099,7 +1099,7 @@ input:-ms-input-placeholder {
                   :before-upload="handleUpload1"
                   :show-upload-list="false"
                   :on-success="uploadSuccess1"
-                  action="/api/park/image_upload"
+                  action="/api/admin/park/image_upload"
                 >
                   <Button class="mansion_btn" size="small">浏览</Button>
                 </Upload>

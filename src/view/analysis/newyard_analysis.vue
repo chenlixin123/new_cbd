@@ -67,7 +67,7 @@ export default {
   },
   created() {
     this.url =
-      "https://datav.aliyuncs.com/share/4e0a6f9e821c4e5825fbc9084d8cb886?timestamp=" +
+      "https://datav.aliyuncs.com/share/6a420eeb43f4527fe115e80bce47bf47?timestamp=" +
       new Date().getTime();
   },
   methods: {

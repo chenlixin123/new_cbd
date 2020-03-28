@@ -15,7 +15,7 @@
           <Icon type="document-text"></Icon>实时分析
         </MenuItem>
         <MenuItem name="2" v-if="new_holistic_analysis">
-          <Icon type="chatbubbles"></Icon>新实时分析
+          <Icon type="chatbubbles"></Icon>实时分析
         </MenuItem>
         <!-- 15 新历史总览 -->
         <MenuItem name="15" v-if="newyard_analysis">
@@ -60,9 +60,9 @@
         title="日志报表"
         v-if="system_Journal || equipment_Journal || operation_Journal || operation_record"
       >
-        <MenuItem name="9" v-if="system_Journal">
+        <!-- <MenuItem name="9" v-if="system_Journal">
           <Icon type="heart-broken"></Icon>系统日志
-        </MenuItem>
+        </MenuItem>-->
         <MenuItem name="12" v-if="equipment_Journal">
           <Icon type="heart"></Icon>设备日志
         </MenuItem>
