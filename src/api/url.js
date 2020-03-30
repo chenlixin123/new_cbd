@@ -123,6 +123,8 @@ let Url = {
   search_operate_log_list: 'admin/operate-log/search-operate-log-list',
   //操作日志列表详情
   search_operate_detail_info: 'admin/operate-log/search-operate-detail-info',
+  //操作日志  查询单位名称列表
+  select_companyVlist: 'admin/operate-log/select-company-list',
 
   //运维任务 
   //删除任务信息

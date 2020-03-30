@@ -307,11 +307,7 @@
           <div class="text">单位名称</div>：
           <!-- <i-input v-model="header" placeholder="单位名称" style="width:200px;"></i-input> -->
           <i-select v-model="company" filterable style="width:200px;" clearable>
-            <i-option
-              v-for="(item,index) in companys"
-              :key="index"
-              :value="item.value"
-            >{{ item.label }}</i-option>
+            <i-option v-for="(item,index) in companys" :key="index" :value="item">{{ item }}</i-option>
           </i-select>
         </div>
         <div class="input1">
@@ -417,20 +413,7 @@ export default {
         }
       },
       //单位名称
-      companys: [
-        {
-          value: "金泰国益大厦",
-          label: "金泰国益大厦"
-        },
-        {
-          value: "京广中心",
-          label: "京广中心"
-        },
-        {
-          value: "万达广场",
-          label: "万达广场"
-        }
-      ],
+      companys: [],
       taskStatus: "", //登录方式
       source1: [
         {
@@ -566,8 +549,20 @@ export default {
   },
   created() {
     this.sear();
+    this.sear_company_list();
   },
   methods: {
+    sear_company_list() {
+      axios
+        .request({
+          url: url.url.select_companyVlist,
+          method: "get"
+        })
+        .then(res => {
+          // console.log(res.data.data);
+          this.companys = res.data.data;
+        });
+    },
     //查询
     sear() {
       let that = this;
