@@ -272,6 +272,24 @@ input:-ms-input-placeholder {
         <div class="bottom1">
           <div class="total_data1">
             <label for style="color:white;">*</label>
+            <label for class="label1">单位</label>：
+            <Input style="width:60%" v-model="datas.company" />
+          </div>
+          <div class="total_data2">
+            <label for style="color:white;">*</label>
+            <label for class="label1">车场</label>：
+            <Select v-model="datas.parkFlag" style="width:60%;">
+              <Option
+                v-for="(item,index) in parkFlaglist"
+                :value="item.id"
+                :key="index"
+              >{{ item.name }}</Option>
+            </Select>
+          </div>
+        </div>
+        <div class="bottom1">
+          <div class="total_data1">
+            <label for style="color:white;">*</label>
             <label for class="label1">状态</label>：
             <Select v-model="datas.status" style="width:60%;">
               <Option v-for="item in status" :value="item.id" :key="item.id">{{ item.value }}</Option>
@@ -285,11 +303,29 @@ input:-ms-input-placeholder {
             </Select>
           </div>
         </div>
+        <div style="margin-left:3%;margin-top:20px;">维护功能（通过手机APP查看）</div>
         <div class="bottom1">
           <div class="total_data1">
             <label for style="color:white;">*</label>
-            <label for class="label1">单位</label>：
-            <Input style="width:60%" v-model="datas.company" />
+            <label for class="label1">一体机</label>：
+            <Select v-model="datas.cameraFlag" :disabled="dis" style="width:60%;">
+              <Option
+                v-for="(item,index) in cameraFlaglist"
+                :value="item.id"
+                :key="index"
+              >{{ item.name }}</Option>
+            </Select>
+          </div>
+          <div class="total_data2">
+            <label for style="color:white;">*</label>
+            <label for class="label1">诱导屏</label>：
+            <Select v-model="datas.screenFlag" :disabled="dis" style="width:60%;">
+              <Option
+                v-for="(item,index) in screenFlaglist"
+                :value="item.id"
+                :key="index"
+              >{{ item.name }}</Option>
+            </Select>
           </div>
         </div>
         <div class="bottom2">
@@ -368,10 +404,40 @@ import axios1 from "@/libs/api.request.json";
 export default {
   data() {
     return {
+      parkFlaglist: [
+        {
+          id: 1,
+          name: "启用",
+        },
+        {
+          id: 0,
+          name: "禁用",
+        },
+      ],
+      screenFlaglist: [
+        {
+          id: 1,
+          name: "启用",
+        },
+        {
+          id: 0,
+          name: "禁用",
+        },
+      ],
+      cameraFlaglist: [
+        {
+          id: 1,
+          name: "启用",
+        },
+        {
+          id: 0,
+          name: "禁用",
+        },
+      ],
       text: "",
       listStyle: {
         width: "40%",
-        height: "100%"
+        height: "100%",
       }, //穿梭框样式
       titles: ["全选", "全选"],
       transfer_data: [],
@@ -387,26 +453,26 @@ export default {
       appFlag: [
         {
           id: 1,
-          value: "APP+网页"
+          value: "APP+网页",
         },
         {
           id: 2,
-          value: "仅网页"
+          value: "仅网页",
         },
         {
           id: 3,
-          value: "仅APP"
-        }
+          value: "仅APP",
+        },
       ],
       status: [
         {
           id: 1,
-          value: "启用"
+          value: "启用",
         },
         {
           id: 0,
-          value: "禁用"
-        }
+          value: "禁用",
+        },
       ],
       datas: {
         accountName: "",
@@ -419,12 +485,28 @@ export default {
         realname: "",
         roleIds: "",
         status: 1,
-        company: ""
-      }
+        parkFlag: 0,
+        cameraFlag: 0,
+        screenFlag: 0,
+        company: "",
+      },
+      dis: true,
     };
   },
+  watch: {
+    "datas.appFlag"(val, oldval) {
+      console.log(val);
+      if (val == 1 || val == 3) {
+        this.dis = false;
+      } else {
+        this.dis = true;
+        this.datas.cameraFlag = 0;
+        this.datas.screenFlag = 0;
+      }
+    },
+  },
   created() {
-    console.log(JSON.parse(this.$route.query.data));
+    // console.log(JSON.parse(this.$route.query.data));
     this.$route.query.data = JSON.parse(this.$route.query.data);
     if (this.$route.query.data != "ss") {
       console.log("不等于空");
@@ -437,6 +519,7 @@ export default {
       this.readonly = false;
       this.readonlys = false;
       this.text = "密码";
+      this.dis = false;
     }
     this.getMockData();
   },
@@ -458,6 +541,16 @@ export default {
         this.$route.query.data.status = 0;
       }
       console.log(this.$route.query.data.appFlag);
+      if (
+        this.$route.query.data.appFlag == 1 ||
+        this.$route.query.data.appFlag == 3
+      ) {
+        this.dis = false;
+      } else {
+        this.dis = true;
+        this.datas.cameraFlag = 0;
+        this.datas.screenFlag = 0;
+      }
     },
     getMockData() {
       let userId = "";
@@ -468,18 +561,18 @@ export default {
         .request({
           url: url.url.search_role,
           params: {
-            userId: userId
+            userId: userId,
           },
-          method: "get"
+          method: "get",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           let data = [];
-          res.data.data.map(res => {
+          res.data.data.map((res) => {
             // console.log(res);
             data.push({
               key: res.id,
-              label: res.name
+              label: res.name,
             });
             if (res.selected == true) {
               this.transfer_data1.push(res.id);
@@ -492,18 +585,18 @@ export default {
         .request({
           url: url.url.search_park_ids,
           params: {
-            userId: userId
+            userId: userId,
           },
-          method: "get"
+          method: "get",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           let data = [];
-          res.data.data.map(res => {
+          res.data.data.map((res) => {
             // console.log(res);
             data.push({
               key: res.id,
-              label: res.name
+              label: res.name,
             });
             if (res.selected == true) {
               this.transfer_data3.push(res.id);
@@ -554,20 +647,20 @@ export default {
             .request({
               url: url.url.save_admin,
               data: this.datas,
-              method: "post"
+              method: "post",
             })
-            .then(res => {
+            .then((res) => {
               console.log(res);
               if (res.data.code == 200) {
                 this.$Notice.success({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
                 this.$router.go(-1);
               } else {
                 this.$Notice.error({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
               }
               this.loading1 = false;
@@ -580,20 +673,20 @@ export default {
             .request({
               url: url.url.modify_admin,
               data: this.datas,
-              method: "post"
+              method: "post",
             })
-            .then(res => {
+            .then((res) => {
               console.log(res);
               if (res.data.code == 200) {
                 this.$Notice.success({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
                 this.$router.go(-1);
               } else {
                 this.$Notice.error({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
               }
               this.loading1 = false;
@@ -619,7 +712,7 @@ export default {
     //修改密码
     modify() {
       this.readonlys = false;
-    }
-  }
+    },
+  },
 };
 </script>

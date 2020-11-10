@@ -390,12 +390,12 @@ export default {
       status: [
         {
           id: 1,
-          value: "启用"
+          value: "启用",
         },
         {
           id: 0,
-          value: "禁用"
-        }
+          value: "禁用",
+        },
       ],
       module_ellipsis: [],
       modal10: false,
@@ -411,10 +411,10 @@ export default {
           accountName: "",
           cellphone: "",
           realname: "",
-          status: ""
+          status: "",
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       data: "",
       show: "",
@@ -425,7 +425,7 @@ export default {
           //   sortable: 'custom',
           key: "accountName",
           tooltip: "true",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "单位",
@@ -433,7 +433,7 @@ export default {
           //   sortable: 'custom',
           key: "company",
           tooltip: "true",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "角色",
@@ -448,28 +448,28 @@ export default {
             }
             return h("div", data);
             console.log(data);
-          }
+          },
         },
         {
           title: "姓名",
           align: "center",
           //   sortable: 'custom',
           key: "realname",
-          minWidth: 90
+          minWidth: 90,
         },
         {
           title: "手机号",
           align: "center",
           //   sortable: 'custom',
           key: "cellphone",
-          minWidth: 110
+          minWidth: 110,
         },
         {
           title: "备注",
           align: "center",
           //   sortable: 'custom',
           key: "remark",
-          minWidth: 135
+          minWidth: 135,
         },
         {
           title: "最后登录",
@@ -486,7 +486,7 @@ export default {
             }
             // console.log(parking.loginTime);
             return h("div", {}, parking.loginTime);
-          }
+          },
         },
         {
           title: "操作",
@@ -504,24 +504,24 @@ export default {
                   size: "large",
                   // disabled:
                   //   params.row.fixedId === null || params.row.rentStatus == 3,
-                  value: params.row.status === 1 // 控制开关的打开或关闭状态，官网文档属性是value
+                  value: params.row.status === 1, // 控制开关的打开或关闭状态，官网文档属性是value
                 },
                 style: {
-                  marginRight: "10px"
+                  marginRight: "10px",
                 },
                 scopedSlots: {
                   open: () => h("span", "启用"),
-                  close: () => h("span", "禁用")
+                  close: () => h("span", "禁用"),
                 },
                 on: {
-                  "on-change": state => {
+                  "on-change": (state) => {
                     if (state) {
                       this.enableParking(parking.id);
                     } else {
                       this.disabledParking(parking.id);
                     }
-                  }
-                }
+                  },
+                },
               }),
               h(
                 "span",
@@ -530,13 +530,13 @@ export default {
                     size: 26,
                     cursor: "pointer",
                     marginRight: "5px",
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.edit(parking);
-                    }
-                  }
+                    },
+                  },
                 },
                 "编辑"
               ),
@@ -545,22 +545,22 @@ export default {
                 {
                   style: {
                     size: 26,
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.delete(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "删除"
-              )
+              ),
             ]);
             return menu;
-          }
-        }
+          },
+        },
       ],
-      data: { total: 0, list: [], loading: true }
+      data: { total: 0, list: [], loading: true },
     };
   },
   created() {
@@ -568,7 +568,7 @@ export default {
     this.list();
   },
   mounted() {
-    this.$root.event.$on("logout", res => {
+    this.$root.event.$on("logout", (res) => {
       this.show = res;
     });
   },
@@ -584,9 +584,9 @@ export default {
         .request({
           url: url.url.search_admin,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -618,22 +618,22 @@ export default {
         .request({
           url: url.url.delete_admin,
           params: {
-            id: this.id_delete
+            id: this.id_delete,
           },
-          method: "delete"
+          method: "delete",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.list();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           this.loading_delete = false;
@@ -652,9 +652,9 @@ export default {
         .request({
           url: url.url.search_admin,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.numbers = data;
           if (res.data.data.list.length == 0) {
@@ -702,9 +702,9 @@ export default {
         .request({
           url: url.url.search_admin,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           that.pages = Number(this.numbers);
           console.log(res);
           that.spinShow = false;
@@ -725,9 +725,9 @@ export default {
       axios
         .request({
           url: url.url.logout,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.logout == true) {
             sessionStorage.setItem("logout", 1);
@@ -736,7 +736,7 @@ export default {
           } else {
             this.$Notice.error({
               title: res.data.message,
-              desc: ""
+              desc: "",
             });
           }
         });
@@ -752,20 +752,20 @@ export default {
           url: url.url.on_Off_admin,
           params: {
             id: id,
-            status: 1
+            status: 1,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           console.log(res);
@@ -779,20 +779,20 @@ export default {
           url: url.url.on_Off_admin,
           params: {
             id: id,
-            status: 0
+            status: 0,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           console.log(res);
@@ -803,7 +803,7 @@ export default {
       if (data.id == "ss") {
         console.log("走新增");
         this.$router.push({
-          path: "/account_Jurisdiction_add"
+          path: "/account_Jurisdiction_add",
         });
       } else {
         console.log("走编辑");
@@ -811,8 +811,8 @@ export default {
         this.$router.push({
           path: "/account_Jurisdiction_add",
           query: {
-            data: datas
-          }
+            data: datas,
+          },
         });
       }
     },
@@ -829,9 +829,9 @@ export default {
         .request({
           url: url.url.search_admin,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -843,7 +843,7 @@ export default {
           this.numbers = 1;
           this.loadinges = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>

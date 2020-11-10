@@ -593,37 +593,42 @@
         <div class="content_top">
           <div class="content_top1">
             <label class="label" for>车场名称</label>：
-            <div>{{data.parkName}}</div>
+            <div>{{ data.parkName }}</div>
           </div>
           <div class="content_top1">
             <label class="label" for>入口</label>：
-            <div>{{ins.length == 0 ? '' : ins.length}}</div>
+            <div>{{ ins.length == 0 ? "" : ins.length }}</div>
           </div>
           <div class="content_top1">
             <label class="label" for>出口</label>：
-            <div>{{outs.length == 0 ? '' : outs.length}}</div>
+            <div>{{ outs.length == 0 ? "" : outs.length }}</div>
           </div>
           <div class="content_top2">
             <label class="label1" for>合用大厦</label>：
-            <span class="mansion" v-for="(item,index) in data.edifices" :key="index">{{item}}</span>
+            <span
+              class="mansion"
+              v-for="(item, index) in data.edifices"
+              :key="index"
+              >{{ item }}</span
+            >
           </div>
         </div>
         <div class="content_bottom">
           <div class="content_top1">
             <label class="label" for>总车位数</label>：
-            <div>{{data.stallSum}}</div>
+            <div>{{ data.stallSum }}</div>
           </div>
           <div class="content_top1">
             <label class="label" for>固定车位数</label>：
-            <div>{{data.fixStallSum}}</div>
+            <div>{{ data.fixStallSum }}</div>
           </div>
           <div class="content_top1">
             <label class="label" for>已绑定车位</label>：
-            <div>{{data.bindStallNumber}}</div>
+            <div>{{ data.bindStallNumber }}</div>
           </div>
           <div class="content_top1">
             <label class="label" for>已绑定车牌</label>：
-            <div>{{data.bindPlateNumber}}</div>
+            <div>{{ data.bindPlateNumber }}</div>
           </div>
         </div>
       </div>
@@ -637,12 +642,13 @@
       <div class="top" v-if="!simulation">
         <div class="input1">
           <div class="text">车位号:</div>
-          <i-select v-model="carname" filterable style="width:200px" clearable>
+          <i-select v-model="carname" filterable style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in carnames"
+              v-for="(item, index) in carnames"
               :key="index"
               :value="item.stallCode"
-            >{{ item.stallCode }}</i-option>
+              >{{ item.stallCode }}</i-option
+            >
           </i-select>
         </div>
         <div class="input1">
@@ -658,11 +664,21 @@
       <div class="top" v-if="simulation">
         <div class="input1">
           <div class="text">起始时间:</div>
-          <DatePicker type="date" placeholder="输入起始时间" style="width: 200px" v-model="startTime"></DatePicker>
+          <DatePicker
+            type="date"
+            placeholder="输入起始时间"
+            style="width: 200px"
+            v-model="startTime"
+          ></DatePicker>
         </div>
         <div class="input1">
           <div class="text">截止时间:</div>
-          <DatePicker type="date" placeholder="输入截止时间" style="width: 200px" v-model="endTime"></DatePicker>
+          <DatePicker
+            type="date"
+            placeholder="输入截止时间"
+            style="width: 200px"
+            v-model="endTime"
+          ></DatePicker>
         </div>
         <div class="input2">
           <div class="texts">到访次数:</div>
@@ -695,13 +711,28 @@
         </div>
       </div>
       <div class="bottom" v-if="!simulation">
-        <div :class="simulation_show == 'true' ? 'button_left' : 'button_left1'">
+        <div
+          :class="simulation_show == 'true' ? 'button_left' : 'button_left1'"
+        >
           <button
             :class="simulation_show == 'true' ? 'button1' : 'button2'"
             @click="authorization"
-          >批量导入</button>
-          <button :class="simulation_show == 'true' ? 'button1' : 'button2'" @click="add">添加车位</button>
-          <button class="button1" v-if="simulation_show == 'true'" @click="add_simulation">模拟添加</button>
+          >
+            批量导入
+          </button>
+          <button
+            :class="simulation_show == 'true' ? 'button1' : 'button2'"
+            @click="add"
+          >
+            添加车位
+          </button>
+          <button
+            class="button1"
+            v-if="simulation_show == 'true'"
+            @click="add_simulation"
+          >
+            模拟添加
+          </button>
         </div>
         <div class="button_right">
           <Button class="button2" @click="sear">查询</Button>
@@ -714,7 +745,9 @@
         </div>
         <div class="button_right">
           <Button class="button2" @click="sear_simulation">查询</Button>
-          <Button class="button3" :loading="loading1" @click="out_simulation">导出</Button>
+          <Button class="button3" :loading="loading1" @click="out_simulation"
+            >导出</Button
+          >
         </div>
       </div>
     </div>
@@ -746,11 +779,17 @@
           <Input
             @input="number1"
             :value="numbers1"
-            style="width: 50px;margin-left:5px;margin-right:5px;"
+            style="width: 50px; margin-left: 5px; margin-right: 5px"
             placeholder="1"
           />
           <div>页</div>
-          <Button class="jump" type="primary" style="margin-left:20px;" @click="jump1">跳转</Button>
+          <Button
+            class="jump"
+            type="primary"
+            style="margin-left: 20px"
+            @click="jump1"
+            >跳转</Button
+          >
         </div>
       </div>
       <!-- <div class="simulation_btn_box">
@@ -760,7 +799,7 @@
     <div v-if="!simulation">
       <div v-if="spinShow == false" class="table">
         <Table
-          style="border:none;"
+          style="border: none"
           highlight-row
           ref="currentRowTable"
           :no-data-text="loadingText ? loadingText : '暂无数据'"
@@ -783,11 +822,17 @@
           <i-input
             @input="number"
             :value="numbers"
-            style="width: 50px;margin-left:5px;margin-right:5px;"
+            style="width: 50px; margin-left: 5px; margin-right: 5px"
             placeholder="1"
           ></i-input>
           <div>页</div>
-          <i-button class="jump" type="primary" style="margin-left:20px;" @click="jump">跳转</i-button>
+          <i-button
+            class="jump"
+            type="primary"
+            style="margin-left: 20px"
+            @click="jump"
+            >跳转</i-button
+          >
         </div>
       </div>
     </div>
@@ -795,63 +840,77 @@
     <!-- 添加车位弹出框 -->
     <div class="module" v-if="show">
       <div class="contents">
-        <div class="module_title">{{data.parkName}}</div>
+        <div class="module_title">{{ data.parkName }}</div>
         <div class="tops1" v-if="show1">
-          <label for style="color:red;">*</label>
+          <label for style="color: red">*</label>
           <label for>车位号：</label>
           <span
             v-if="!disableds"
-            style="margin-bottom:1%;display:inline-block;padding-top:1.5%;"
-          >&nbsp;{{module_carname}}</span>
+            style="margin-bottom: 1%; display: inline-block; padding-top: 1.5%"
+            >&nbsp;{{ module_carname }}</span
+          >
           <Select
             v-model="module_carname"
             filterable
             size="small"
-            style="width: 30%;height:30px;"
+            style="width: 30%; height: 30px"
             clearable
             allow-create
             @on-create="handleCreate1"
             v-if="disableds"
           >
             <Option
-              v-for="(item,index) in module_carnames"
+              v-for="(item, index) in module_carnames"
               :key="index"
               :value="item.stallCode"
-            >{{ item.stallCode }}</Option>
+              >{{ item.stallCode }}</Option
+            >
           </Select>
 
           <br />
-          <label for style="color:red;">*</label>
+          <label for style="color: red">*</label>
           <label for>车牌号：</label>
           <Tag
             closable
             @on-close="handleClose(item)"
-            v-for="(item,index) in plateNo"
+            v-for="(item, index) in plateNo"
             :key="index"
-          >{{item}}</Tag>
+            >{{ item }}</Tag
+          >
           <span class="add" @click="adds">添加车牌</span>
         </div>
 
         <div class="tops1" v-if="!show1">
-          <label for style="color:red;">*</label>
+          <label for style="color: red">*</label>
           <label for>车位号：</label>
           <span
-            style="margin-bottom:1%;display:inline-block;padding-top:1.5%;"
-          >&nbsp;{{module_carname}}</span>
+            style="margin-bottom: 1%; display: inline-block; padding-top: 1.5%"
+            >&nbsp;{{ module_carname }}</span
+          >
           <br />
-          <label for style="color:red;">*</label>
+          <label for style="color: red">*</label>
           <label for>车牌号：</label>
           <input
             v-model="values1"
             @input="ss1(values1)"
             placeholder="请输入车牌号"
-            style="width: 60%;height:28px;margin-left:2px;border:1px solid #e3e8ee;border-radius:5px;outline:none;padding-left:5px;"
+            style="
+              width: 60%;
+              height: 28px;
+              margin-left: 2px;
+              border: 1px solid #e3e8ee;
+              border-radius: 5px;
+              outline: none;
+              padding-left: 5px;
+            "
           />
         </div>
 
-        <hr style="border:1.5px solid #c5c8ce" />
+        <hr style="border: 1.5px solid #c5c8ce" />
         <div class="bottoms">
-          <Button class="save" @click="save" :loading="car_loading">确定</Button>
+          <Button class="save" @click="save" :loading="car_loading"
+            >确定</Button
+          >
           <Button class="cancels" @click="cancels">取消</Button>
         </div>
       </div>
@@ -861,8 +920,10 @@
       <Spin fix size="large" v-if="spinShow"></Spin>
     </div>
     <Modal v-model="modal10" :closable="false">
-      <p class="ellipsis" v-for="(item,index) in module_ellipsis" :key="index">{{item}}</p>
-      <div slot="footer" style="width:100%;height:35px;textAlign:center;">
+      <p class="ellipsis" v-for="(item, index) in module_ellipsis" :key="index">
+        {{ item }}
+      </p>
+      <div slot="footer" style="width: 100%; height: 35px; textalign: center">
         <button class="close" @click="dels">关闭</button>
       </div>
     </Modal>
@@ -871,7 +932,12 @@
       <div class="contentes_delete">
         <div class="content_top_delete">确定删除？</div>
         <div class="content_bottom_delete">
-          <Button class="success_delete" :loading="loading_delete" @click="success_delete">确定</Button>
+          <Button
+            class="success_delete"
+            :loading="loading_delete"
+            @click="success_delete"
+            >确定</Button
+          >
           <Button class="canceles_delete" @click="canceles_delete">取消</Button>
         </div>
       </div>
@@ -906,7 +972,7 @@ export default {
         parkCode: "",
         plateFlag: 0,
         plateNumber: "",
-        stallCode: ""
+        stallCode: "",
       },
       ins: [], //入口
       outs: [], //出口
@@ -942,20 +1008,20 @@ export default {
         condition: {
           parkCode: "",
           plateNumber: "",
-          stallCode: ""
+          stallCode: "",
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       conditions1: {
         condition: {
           parkCode: "",
           endTime: "",
           startTime: "",
-          times: ""
+          times: "",
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       columns: [
         {
@@ -973,30 +1039,25 @@ export default {
                 ? "模拟"
                 : "";
             return h("div", data);
-          }
+          },
         },
         {
           title: "车位号",
           align: "center",
-          //   sortable: 'custom',
-          key: "stallCode"
+          key: "stallCode",
         },
         {
           title: "车牌号",
-          //   sortable: 'custom',
           align: "left",
           key: "plateNumber",
           minWidth: 100,
           render: (h, params) => {
-            // console.log(params.row);
             let clist = params.row.plateNumber;
             const list = [];
             let sindex = 0;
             if (clist && clist !== null) {
               clist = clist.split(",");
-              // console.log(clist);
               clist.forEach((value, index) => {
-                // console.log(index);
                 if (index <= 2) {
                   list[index] = h(
                     "div",
@@ -1010,11 +1071,11 @@ export default {
                         paddingRight: "5px",
                         borderRadius: "5px",
                         margin: "0 auto",
-                        marginLeft: "5px"
+                        marginLeft: "5px",
                       },
                       domProps: {
-                        title: params.row.plateNumber
-                      }
+                        title: params.row.plateNumber,
+                      },
                     },
                     value
                   );
@@ -1026,13 +1087,13 @@ export default {
                         style: {
                           fontSize: "20px",
                           cursor: "pointer",
-                          display: "inline"
+                          display: "inline",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       "..."
                     ),
@@ -1044,22 +1105,22 @@ export default {
                           cursor: "pointer",
                           display: "inline",
                           // border: "1px solid red",
-                          marginBottom: "20px"
+                          marginBottom: "20px",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       clist.length
-                    )
+                    ),
                   ]);
                 }
               });
             }
             return list;
-          }
+          },
         },
         {
           title: "操作",
@@ -1068,35 +1129,30 @@ export default {
           align: "center",
           render: (h, params) => {
             let parking = params.row;
-            // console.log(parking);
             let menu = null;
             menu = h("div", [
               h("i-switch", {
                 props: {
                   type: "warning",
                   size: "large",
-                  // disabled:
-                  // params.row.fixedId === null,
-                  value: params.row.plateFlag === 1 // 控制开关的打开或关闭状态，官网文档属性是value
+                  value: params.row.plateFlag === 1, // 控制开关的打开或关闭状态，官网文档属性是value
                 },
                 style: {
-                  // background:'#f66913',
-                  // border:'1px solid #f66913'
-                  marginRight: "10px"
+                  marginRight: "10px",
                 },
                 scopedSlots: {
                   open: () => h("span", "正常"),
-                  close: () => h("span", "禁用")
+                  close: () => h("span", "禁用"),
                 },
                 on: {
-                  "on-change": state => {
+                  "on-change": (state) => {
                     if (state) {
                       this.enableParking(parking.id);
                     } else {
                       this.disabledParking(parking.id);
                     }
-                  }
-                }
+                  },
+                },
               }),
               h(
                 "span",
@@ -1104,13 +1160,13 @@ export default {
                   style: {
                     size: 26,
                     marginRight: "5px",
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.edit(parking);
-                    }
-                  }
+                    },
+                  },
                 },
                 "编辑"
               ),
@@ -1120,36 +1176,36 @@ export default {
                   props: {
                     // type: 'md-eye',
                     size: 26,
-                    color: "#19be6b"
+                    color: "#19be6b",
                   },
                   style: {
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.del(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "删除"
-              )
+              ),
             ]);
             return menu;
-          }
-        }
+          },
+        },
       ],
       columns1: [
         {
           type: "selection",
           width: 60,
-          align: "center"
+          align: "center",
         },
         {
           title: "车牌号",
           //   sortable: 'custom',
           align: "center",
           key: "plateNumber",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "属性",
@@ -1164,7 +1220,7 @@ export default {
                 ? "固定"
                 : "";
             return h("div", data);
-          }
+          },
         },
         {
           title: "时间",
@@ -1174,30 +1230,28 @@ export default {
           render: (h, params) => {
             let data = params.row.startTime + "-" + params.row.endTime;
             return h("div", data);
-          }
+          },
         },
         {
           title: "到访次数",
           align: "center",
           //   sortable: 'custom',
-          key: "times"
+          key: "times",
         },
         {
           title: "平均时长",
           align: "center",
           //   sortable: 'custom',
-          key: "average"
-        }
+          key: "average",
+        },
       ],
       datas: { total: 0, list: [], loading: false },
-      datas1: { total: 0, list: [], loading: false }
+      datas1: { total: 0, list: [], loading: false },
     };
   },
   created() {
-    console.log(sessionStorage.getItem("simulation_show"));
-    console.log();
+    // console.log(sessionStorage.getItem("simulation_show"));
     if (sessionStorage.getItem("simulation_show")) {
-      console.log("/////////////////////");
       this.simulation_show = sessionStorage.getItem("simulation_show");
     }
     this.loadingText = "";
@@ -1213,13 +1267,12 @@ export default {
         .request({
           url: url.url.find_park,
           params: {
-            id: this.$route.query.id
+            id: this.$route.query.id,
           },
-          method: "get"
+          method: "get",
         })
-        .then(res => {
-          console.log(res);
-          res.data.data.gateInfos.map(res => {
+        .then((res) => {
+          res.data.data.gateInfos.map((res) => {
             if (res.gateType == 1) {
               this.ins.push(res);
             } else {
@@ -1238,13 +1291,12 @@ export default {
         .request({
           url: url.url.select_park_info,
           params: {
-            parkCode: this.data.parkCode
+            parkCode: this.data.parkCode,
           },
-          method: "get"
+          method: "get",
         })
-        .then(res => {
+        .then((res) => {
           that.spinShow = false;
-          console.log(res);
           that.carnames = res.data.data;
           this.module_carnames = res.data.data;
         });
@@ -1253,10 +1305,9 @@ export default {
         .request({
           url: url.url.search_plate,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           (this.pages = 1), (this.numbers = 1);
           that.spinShow = false;
           this.datas = res.data.data;
@@ -1268,7 +1319,6 @@ export default {
       this.loadinges = true;
       this.datas = "";
       this.conditions.pageNo = 1;
-      console.log("查询");
       if (this.carname) {
         this.conditions.condition.stallCode = this.carname;
       } else {
@@ -1279,15 +1329,13 @@ export default {
       } else {
         this.conditions.condition.plateNumber = "";
       }
-      console.log(this.conditions);
       axios1
         .request({
           url: url.url.search_plate,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.numbers = 1;
           this.pages = Number(1);
           if (res.data.data.list.length == 0) {
@@ -1301,7 +1349,6 @@ export default {
     },
     //导出
     out() {
-      console.log("导出");
       let that = this;
       that.loading1 = true;
       this.conditions.pageSize = 1000;
@@ -1309,21 +1356,19 @@ export default {
         .request({
           url: url.url.search_plate,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
             that.loading1 = false;
             this.$Notice.error({
               title: "系统提示",
-              desc: "导出数据不能为空"
+              desc: "导出数据不能为空",
             });
           } else {
-            let datas = res.data.data.list.map(res => {
-              // console.log(res);
+            let datas = res.data.data.list.map((res) => {
               res.plateSource =
                 res.plateSource == 1
                   ? "添加"
@@ -1335,7 +1380,7 @@ export default {
               res.plateNumber = res.plateNumber.replace(",", "，");
               return res;
             });
-            let columns = this.columns.filter(function(col, index) {
+            let columns = this.columns.filter(function (col, index) {
               return index < 3;
             });
 
@@ -1343,7 +1388,7 @@ export default {
               filename: "车位信息",
               columns: columns,
               original: false,
-              data: datas
+              data: datas,
             });
             that.loading1 = false;
             this.conditions.pageSize = 10;
@@ -1352,51 +1397,46 @@ export default {
     },
     //批量导入
     authorization() {
-      console.log("批量导入");
       this.$router.push({
         path: "/car_administration_excel",
         query: {
           parkCode: this.data.parkCode,
-          id: this.data.id
-        }
+          id: this.data.id,
+        },
       });
     },
     //下拉输入创建车位
     handleCreate1(val) {
-      console.log(val);
       this.module_carnames.push({
-        stallCode: val
+        stallCode: val,
       });
     },
     //添加车位
     add() {
-      console.log("添加车位");
       this.disableds = true;
       this.show = true;
     },
     //启用
     enableParking(id) {
-      console.log(id);
       axios1
         .request({
           url: url.url.on_off_plate,
           params: {
             id: id,
-            plateFlag: 1
+            plateFlag: 1,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.lists();
           }
@@ -1404,27 +1444,25 @@ export default {
     },
     //禁用
     disabledParking(id) {
-      console.log(id);
       axios1
         .request({
           url: url.url.on_off_plate,
           params: {
             id: id,
-            plateFlag: 0
+            plateFlag: 0,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.lists();
           }
@@ -1437,15 +1475,12 @@ export default {
         let sv = str.test(this.values1);
         if (sv) {
           if (this.plateNo.length == 0) {
-            console.log("11111");
             this.show1 = true;
             this.plateNo.push(this.values1);
             this.values1 = "";
           } else {
-            console.log("2222222222");
             this.svn = false;
-            this.plateNo.map(res => {
-              // console.log(res);
+            this.plateNo.map((res) => {
               res = res.replace(/\s*/g, "");
               if (res == this.values1) {
                 this.$Message.warning("车牌号已存在,请勿重复添加");
@@ -1473,28 +1508,24 @@ export default {
           this.plate.plateNumber = this.plateNo.join(",");
           this.plate.stallCode = this.module_carname;
           this.car_loading = true;
-          // console.log(this.plate);
-          console.log(this.disableds);
           if (this.disableds == true) {
-            console.log("走新增");
             axios1
               .request({
                 url: url.url.save_plate,
                 data: this.plate,
-                method: "post"
+                method: "post",
               })
-              .then(res => {
-                console.log(res);
+              .then((res) => {
                 if (res.data.code == 200) {
                   this.$Notice.success({
                     title: "系统提示",
-                    desc: res.data.message
+                    desc: res.data.message,
                   });
                   this.lists();
                 } else {
                   this.$Notice.error({
                     title: "系统提示",
-                    desc: res.data.message
+                    desc: res.data.message,
                   });
                 }
                 this.car_loading = false;
@@ -1504,27 +1535,24 @@ export default {
                 this.show = false;
               });
           } else {
-            console.log("走编辑");
-            console.log(this.plate);
             this.plate.id = this.plate_id;
             axios1
               .request({
                 url: url.url.update_plate,
                 data: this.plate,
-                method: "post"
+                method: "post",
               })
-              .then(res => {
-                console.log(res);
+              .then((res) => {
                 if (res.data.code == 200) {
                   this.$Notice.success({
                     title: "系统提示",
-                    desc: res.data.message
+                    desc: res.data.message,
                   });
                   this.lists();
                 } else {
                   this.$Notice.error({
                     title: "系统提示",
-                    desc: res.data.message
+                    desc: res.data.message,
                   });
                 }
                 this.car_loading = false;
@@ -1539,7 +1567,6 @@ export default {
     },
     //取消
     cancels() {
-      console.log("取消");
       if (this.show1 == false) {
         this.show1 = true;
       } else {
@@ -1552,7 +1579,6 @@ export default {
     },
     //添加车牌
     adds() {
-      // console.log(this.module_carname);
       if (this.module_carname) {
         this.show1 = false;
       } else {
@@ -1568,8 +1594,6 @@ export default {
     },
     //编辑
     edit(data) {
-      console.log(data);
-      // console.log(data.plateNumber.split(","));
       this.plate_id = data.id;
       this.plateNo = data.plateNumber.split(",");
       this.disableds = false;
@@ -1578,7 +1602,6 @@ export default {
     },
     //删除
     del(id) {
-      console.log(id);
       this.show_delete = true;
       this.id_delete = id;
     },
@@ -1589,22 +1612,21 @@ export default {
         .request({
           url: url.url.delete_plate,
           params: {
-            id: this.id_delete
+            id: this.id_delete,
           },
-          method: "delete"
+          method: "delete",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.lists();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           this.loading_delete = false;
@@ -1621,16 +1643,14 @@ export default {
       let that = this;
       this.loadinges = true;
       this.loadingText = "数据加载中...";
-      console.log(data1);
       that.conditions.pageNo = data1;
       axios1
         .request({
           url: url.url.search_plate,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
             this.loadinges = false;
@@ -1645,16 +1665,14 @@ export default {
       let that = this;
       this.loadinges1 = true;
       this.loadingText1 = "数据加载中...";
-      console.log(data1);
       that.conditions1.pageNo = data1;
       axios1
         .request({
           url: url.url.search_analog_plate,
           data: this.conditions1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.data.list.length == 0) {
             this.loadingText1 = "";
             this.loadinges1 = false;
@@ -1670,7 +1688,6 @@ export default {
         this.numbers = data;
       } else {
         var reg = /^\d{1,}$/;
-        console.log(reg.test(data));
         if (reg.test(data) == false) {
           this.numbers = 1;
         } else {
@@ -1687,7 +1704,6 @@ export default {
         this.numbers1 = data;
       } else {
         var reg = /^\d{1,}$/;
-        console.log(reg.test(data));
         if (reg.test(data) == false) {
           this.numbers1 = 1;
         } else {
@@ -1701,9 +1717,6 @@ export default {
     },
     jump() {
       let that = this;
-      console.log(this.numbers);
-      // this.datas = "";
-      // this.datas.list = "";
       this.loadinges = true;
       this.loadingText = "数据加载中...";
       if (this.numbers == "") {
@@ -1717,10 +1730,9 @@ export default {
         .request({
           url: url.url.search_plate,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.pages = Number(this.numbers);
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -1733,9 +1745,6 @@ export default {
     },
     jump1() {
       let that = this;
-      console.log(this.numbers1);
-      // this.datas = "";
-      // this.datas.list = "";
       this.loadinges1 = true;
       this.loadingText1 = "数据加载中...";
       if (this.numbers1 == "") {
@@ -1749,10 +1758,9 @@ export default {
         .request({
           url: url.url.search_analog_plate,
           data: this.conditions1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.pages1 = Number(this.numbers1);
           if (res.data.data.list.length == 0) {
             this.loadingText1 = "";
@@ -1777,14 +1785,10 @@ export default {
     },
     //显示省略车牌号
     showEllipsis(id) {
-      console.log(id);
-      console.log(this.datas.list);
-      this.datas.list.map(res => {
-        console.log(res.id);
+      this.datas.list.map((res) => {
         if (res.id == id) {
           if (res.plateNumber) {
             this.module_ellipsis = res.plateNumber.split(",");
-            console.log(this.module_ellipsis);
             this.modal10 = true;
           }
         }
@@ -1795,10 +1799,7 @@ export default {
     },
     //删除车牌号
     handleClose(data) {
-      console.log(data);
-      console.log(this.plateNo);
       this.plateNo.map((res, index, arry) => {
-        console.log(arry);
         if (res == data) {
           arry.splice(index, 1);
         }
@@ -1806,12 +1807,10 @@ export default {
     },
     // 模拟添加
     add_simulation() {
-      console.log("模拟添加");
       this.simulation = true;
     },
     //模拟导出
     out_simulation() {
-      console.log("导出");
       if (this.startTime) {
         this.startTime = url.time(this.startTime);
       } else {
@@ -1844,33 +1843,29 @@ export default {
         .request({
           url: url.url.search_analog_plate,
           data: this.conditions1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.data.list.length == 0) {
             this.$Notice.error({
               title: "系统提示",
-              desc: "导出数据不能为空"
+              desc: "导出数据不能为空",
             });
           } else {
-            let datas = res.data.data.list.map(res => {
-              console.log(res);
+            let datas = res.data.data.list.map((res) => {
               res.startTime = res.startTime + "-" + res.endTime;
               res.type = res.type == 0 ? "临停" : res.type == 1 ? "固定" : "";
               return res;
             });
-            // console.log(datas);
-            let columns = this.columns1.filter(function(col, index) {
+            let columns = this.columns1.filter(function (col, index) {
               return index > 0;
             });
-            // console.log(columns);
 
             this.$refs.currentRowTable1.exportCsv({
               filename: "模拟车位信息",
               columns: columns,
               original: false,
-              data: datas
+              data: datas,
             });
             this.conditions1.pageSize = 10;
           }
@@ -1909,10 +1904,9 @@ export default {
         .request({
           url: url.url.search_analog_plate,
           data: this.conditions1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.numbers1 = 1;
           this.pages1 = Number(1);
           if (res.data.data.list.length == 0) {
@@ -1925,21 +1919,17 @@ export default {
         });
     },
     ff(data) {
-      // console.log(data);
       this.parkCodes = "";
       this.plateNumbers = [];
       if (data.length != 0) {
         this.parkCodes = data[0].parkCode;
       }
-      data.map(res => {
+      data.map((res) => {
         this.plateNumbers.push(res.plateNumber);
       });
-      // console.log(this.parkCodes);
-      // console.log(this.plateNumbers);
     },
     //保存选中模拟车场
     save_simulation() {
-      console.log("保存");
       if (this.parkCodes == "") {
         this.$Message.warning("请选择车牌");
         return;
@@ -1949,27 +1939,26 @@ export default {
           url: url.url.save_analog_plate_info,
           data: {
             parkCode: this.parkCodes,
-            plateNumber: this.plateNumbers
+            plateNumber: this.plateNumbers,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.lists();
             this.back();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

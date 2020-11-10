@@ -55,7 +55,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     proxy: {
       '/api': {
-        // target: 'http://192.168.1.128:9093', // 开发cn 测试net  线上com linkmoretech.cn 线上环境
+        // target: 'http://192.168.1.128:9093', // 开发cn 测试net  线上com linkmoretech.cn 线上环境 不能用
         target: 'pgm.linkmoretech.cn', //线上
         // target: 'http://39.96.159.221:9090',
         pathRewrite: {

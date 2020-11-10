@@ -422,23 +422,32 @@
     <div class="search">
       <div class="top">
         <div class="input1">
-          <div class="text">车场名称</div>：
-          <i-select v-model="carname" filterable style="width:200px" clearable>
+          <div class="text">车场名称</div>
+          ：
+          <i-select v-model="carname" filterable style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in carnames"
+              v-for="(item, index) in carnames"
               :key="index"
               :value="item.id"
-            >{{ item.parkName }}</i-option>
+              >{{ item.parkName }}</i-option
+            >
           </i-select>
         </div>
         <div class="input1">
-          <div class="text">车场大厦</div>：
-          <i-select v-model="carmansion" filterable style="width:200px" clearable>
+          <div class="text">车场大厦</div>
+          ：
+          <i-select
+            v-model="carmansion"
+            filterable
+            style="width: 200px"
+            clearable
+          >
             <i-option
-              v-for="(item,index) in carmansions"
+              v-for="(item, index) in carmansions"
               :key="index"
               :value="item.id"
-            >{{ item.edificeName }}</i-option>
+              >{{ item.edificeName }}</i-option
+            >
           </i-select>
         </div>
       </div>
@@ -476,11 +485,11 @@
         <Input
           @input="number"
           :value="numbers"
-          style="width: 50px;margin-left:5px;margin-right:5px;"
+          style="width: 50px; margin-left: 5px; margin-right: 5px"
           placeholder="1"
         />
         <div>页</div>
-        <Button style="margin-left:20px;" @click="jump">跳转</Button>
+        <Button style="margin-left: 20px" @click="jump">跳转</Button>
       </div>
     </div>
 
@@ -489,8 +498,10 @@
       <Spin fix size="large" v-if="spinShow"></Spin>
     </div>
     <Modal v-model="modal10" :closable="false">
-      <p class="ellipsis" v-for="(item,index) in module_ellipsis" :key="index">{{item}}</p>
-      <div slot="footer" style="width:100%;height:35px;textAlign:center;">
+      <p class="ellipsis" v-for="(item, index) in module_ellipsis" :key="index">
+        {{ item }}
+      </p>
+      <div slot="footer" style="width: 100%; height: 35px; textalign: center">
         <button class="close" @click="del">关闭</button>
       </div>
     </Modal>
@@ -499,7 +510,12 @@
       <div class="contentes_delete">
         <div class="content_top_delete">确定删除？</div>
         <div class="content_bottom_delete">
-          <Button class="success_delete" :loading="loading_delete" @click="success_delete">确定</Button>
+          <Button
+            class="success_delete"
+            :loading="loading_delete"
+            @click="success_delete"
+            >确定</Button
+          >
           <Button class="canceles_delete" @click="canceles_delete">取消</Button>
         </div>
       </div>
@@ -507,11 +523,11 @@
     <!-- 修改弹出框 -->
     <Modal v-model="modal11" :closable="false" :mask-closable="false">
       <div class="title_modau">
-        <div>{{title_modau}}</div>
-        <div>{{parkName}}</div>
+        <div>{{ title_modau }}</div>
+        <div>{{ parkName }}</div>
       </div>
       <div class="center_modal">
-        <label for style="color:white;">*</label>
+        <label for style="color: white">*</label>
         <label for>剩余临停车位</label>：
         <InputNumber
           :max="max_temp"
@@ -522,7 +538,7 @@
         ></InputNumber>
         <br />
         <br />
-        <label for style="color:white;">*</label>
+        <label for style="color: white">*</label>
         <label for>剩余固定车位</label>：
         <InputNumber
           :max="max_fix"
@@ -532,8 +548,18 @@
           style="width: 300px"
         ></InputNumber>
       </div>
-      <div slot="footer" style="width:100%;height:35px;display:flex;justify-content: space-around;">
-        <Button class="success" @click="success_modal" :loading="button_loading">保存</Button>
+      <div
+        slot="footer"
+        style="
+          width: 100%;
+          height: 35px;
+          display: flex;
+          justify-content: space-around;
+        "
+      >
+        <Button class="success" @click="success_modal" :loading="button_loading"
+          >保存</Button
+        >
         <Button class="close_number" @click="del">取消</Button>
       </div>
     </Modal>
@@ -552,7 +578,7 @@ export default {
       success_data: {
         freeTempStallSum: 0, //剩余临停车位
         freeFixStallSum: 0, //剩余固定车位
-        id: ""
+        id: "",
       },
       button_loading: false,
       title_modau: "车位修正",
@@ -577,10 +603,10 @@ export default {
       tableList: {
         condition: {
           edificeId: null,
-          parkId: null
+          parkId: null,
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       data: "",
       show: "",
@@ -588,64 +614,55 @@ export default {
         {
           title: "车场名称",
           align: "center",
-          //   sortable: 'custom',
           key: "parkName",
           tooltip: "true",
-          minWidth: 220
+          minWidth: 220,
         },
         {
           title: "车位总数",
           align: "center",
-          //   sortable: 'custom',
           key: "stallSum",
-          width: 80
+          width: 80,
         },
         {
           title: "固定车位",
           align: "center",
-          //   sortable: 'custom',
           key: "fixStallSum",
-          width: 80
+          width: 80,
         },
         {
           title: "已绑固定车位",
           align: "center",
-          //   sortable: 'custom',
           key: "bindedStallSum",
-          width: 100
+          width: 100,
         },
         {
           title: "已绑固定车牌",
           align: "center",
-          //   sortable: 'custom',
           key: "bindedPlateSum",
-          width: 100
+          width: 100,
         },
         {
           title: "临停车位",
           align: "center",
-          //   sortable: 'custom',
           key: "tempStallSum",
-          width: 80
+          width: 80,
         },
         {
           title: "剩余临停车位",
           align: "center",
-          //   sortable: 'custom',
           key: "freeTempStallSum",
-          width: 100
+          width: 100,
         },
         {
           title: "剩余固定车位",
           align: "center",
-          //   sortable: 'custom',
           key: "freeFixStallSum",
-          width: 100
+          width: 100,
         },
         {
           title: "统计算法",
           align: "center",
-          //   sortable: 'custom',
           key: "statistics",
           minWidth: 120,
           render: (h, params) => {
@@ -657,44 +674,37 @@ export default {
                 ? "软件计算"
                 : "";
             return h("div", data);
-          }
+          },
         },
         {
           title: "入口",
           align: "center",
-          //   sortable: 'custom',
           key: "inSum",
-          minWidth: 80
+          minWidth: 80,
         },
         {
           title: "出口",
           align: "center",
-          //   sortable: 'custom',
           key: "outSum",
-          minWidth: 80
+          minWidth: 80,
         },
         {
           title: "一体机",
           align: "center",
-          //   sortable: 'custom',
           key: "cameraSum",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "合用大厦",
-          //   sortable: 'custom',
           align: "left",
           key: "edifices",
           minWidth: 275,
           render: (h, params) => {
-            // console.log(params);
             let clist = params.row.edifices;
             const list = [];
             let sindex = 0;
             if (clist && clist !== null) {
-              // console.log(clist);
               clist.forEach((value, index) => {
-                // console.log(index);
                 if (index == 0) {
                   list[index] = h(
                     "div",
@@ -703,14 +713,13 @@ export default {
                         width: "80px",
                         display: "inline",
                         textAlign: "center",
-                        // border: "1px solid #464c5b",
                         borderRadius: "5px",
                         margin: "0 auto",
-                        marginLeft: "5px"
+                        marginLeft: "5px",
                       },
                       domProps: {
-                        title: params.row.edifices
-                      }
+                        title: params.row.edifices,
+                      },
                     },
                     value
                   );
@@ -722,21 +731,16 @@ export default {
                         width: "80px",
                         display: "inline",
                         textAlign: "center",
-                        // border: "1px solid #464c5b",
-                        // paddingLeft: "5px",
-                        // paddingRight: "5px",
                         borderRadius: "5px",
-                        margin: "0 auto"
-                        // marginLeft: "5px"
+                        margin: "0 auto",
                       },
                       domProps: {
-                        title: params.row.edifices
-                      }
+                        title: params.row.edifices,
+                      },
                     },
                     " / " + value
                   );
                 } else if (index == 2) {
-                  // console.log(params.row);
                   list[index] = h("span", [
                     h(
                       "span",
@@ -744,13 +748,13 @@ export default {
                         style: {
                           fontSize: "20px",
                           cursor: "pointer",
-                          display: "inline"
+                          display: "inline",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       "..."
                     ),
@@ -761,23 +765,22 @@ export default {
                           fontSize: "10px",
                           cursor: "pointer",
                           display: "inline",
-                          // border: "1px solid red",
-                          marginBottom: "20px"
+                          marginBottom: "20px",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       clist.length
-                    )
+                    ),
                   ]);
                 }
               });
             }
             return list;
-          }
+          },
         },
         {
           title: "操作",
@@ -786,7 +789,6 @@ export default {
           align: "center",
           render: (h, params) => {
             let parking = params.row;
-            // console.log(parking);
             let menu = null;
             menu = h("div", [
               h(
@@ -794,18 +796,18 @@ export default {
                 {
                   props: {
                     size: 26,
-                    color: "#19be6b"
+                    color: "#19be6b",
                   },
                   style: {
                     marginRight: "8px",
                     cursor: "pointer",
-                    color: "#f66913"
+                    color: "#f66913",
                   },
                   on: {
                     click: () => {
                       this.edit_number(params.row);
-                    }
-                  }
+                    },
+                  },
                 },
                 "车位修正"
               ),
@@ -814,51 +816,47 @@ export default {
                 {
                   props: {
                     size: 26,
-                    color: "#19be6b"
+                    color: "#19be6b",
                   },
                   style: {
                     marginRight: "5px",
                     cursor: "pointer",
-                    color: "#f66913"
+                    color: "#f66913",
                   },
                   on: {
                     click: () => {
                       this.toViewRental(params.row, false);
-                    }
-                  }
+                    },
+                  },
                 },
                 "固定车位"
-              )
+              ),
             ]);
             return menu;
-          }
-        }
+          },
+        },
       ],
-      data: { total: 0, list: [], loading: true }
+      data: { total: 0, list: [], loading: true },
     };
   },
   watch: {
     carname() {
-      console.log(this.carname);
-      this.carnames.map(res => {
+      this.carnames.map((res) => {
         if (res.id == this.carname) {
-          console.log(res);
           this.carmansions = res.edificeInfos;
           return;
         } else if (this.carname == undefined) {
-          console.log("1");
           this.carmansions = this.carmansions1;
           this.carmansion = "";
         }
       });
-    }
+    },
   },
   created() {
-    // console.log(url.time(1556553600000));
     this.list();
   },
   mounted() {
-    this.$root.event.$on("logout", res => {
+    this.$root.event.$on("logout", (res) => {
       this.show = res;
     });
   },
@@ -868,11 +866,11 @@ export default {
       axios
         .request({
           url: url.url.car_name,
-          method: "get"
+          method: "get",
         })
-        .then(res => {
+        .then((res) => {
           this.carnames = res.data.data;
-          res.data.data.map(res => {
+          res.data.data.map((res) => {
             this.carmansions = [...this.carmansions, ...res.edificeInfos];
             this.carmansions1 = [...this.carmansions1, ...res.edificeInfos];
           });
@@ -890,10 +888,9 @@ export default {
         .request({
           url: url.url.ren_list,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -906,14 +903,10 @@ export default {
     },
     //显示省略车牌号
     showEllipsis(id) {
-      console.log(id);
-      console.log(this.data.list);
-      this.data.list.map(res => {
-        console.log(res.id);
+      this.data.list.map((res) => {
         if (res.id == id) {
           if (res.edifices) {
             this.module_ellipsis = res.edifices;
-            console.log(this.module_ellipsis);
             this.modal10 = true;
           }
         }
@@ -931,22 +924,21 @@ export default {
         .request({
           url: url.url.delete,
           params: {
-            id: this.id_delete
+            id: this.id_delete,
           },
-          method: "delete"
+          method: "delete",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.list();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           this.loading_delete = false;
@@ -957,7 +949,6 @@ export default {
     search(data) {
       this.data = "";
       this.loadinges = true;
-      console.log(data - 1);
       this.pages = data;
       let that = this;
       this.tableList.pageNo = data;
@@ -965,10 +956,9 @@ export default {
         .request({
           url: url.url.ren_list,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.numbers = data;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -984,7 +974,6 @@ export default {
         this.numbers = data;
       } else {
         var reg = /^\d{1,}$/;
-        console.log(reg.test(data));
         if (reg.test(data) == false) {
           this.numbers = 1;
         } else {
@@ -998,7 +987,6 @@ export default {
     },
     //点击跳转
     jump() {
-      console.log(this.totalPages);
       this.data = "";
       this.loadinges = true;
       let that = this;
@@ -1006,20 +994,16 @@ export default {
         this.numbers = 1;
       } else if (this.numbers > this.totalPages) {
         this.numbers = this.totalPages;
-        console.log(this.totalPages);
       }
-      console.log(this.numbers);
       this.tableList.pageNo = this.numbers;
-      // console.log(this.tableList);
       axios1
         .request({
           url: url.url.ren_list,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           that.pages = Number(this.numbers);
-          console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -1038,10 +1022,9 @@ export default {
       axios
         .request({
           url: url.url.logout,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.logout == true) {
             sessionStorage.setItem("logout", 1);
             this.$router.replace({ path: "/" });
@@ -1049,7 +1032,7 @@ export default {
           } else {
             this.$Notice.error({
               title: res.data.message,
-              desc: ""
+              desc: "",
             });
           }
         });
@@ -1059,22 +1042,20 @@ export default {
     },
     //详情
     toViewRental(id, show) {
-      console.log(id);
       sessionStorage.setItem("simulation_show", show);
       let ids = id.id;
       this.$router.push({
         path: "/car_administration_view",
         query: {
           id: ids,
-          show: show
-        }
+          show: show,
+        },
       });
     },
     //搜索
     sear() {
       let that = this;
       this.loadinges = true;
-      console.log("查询");
       that.loadingText = "数据加载中...";
       this.data = "";
       this.tableList.pageNo = 1;
@@ -1091,10 +1072,9 @@ export default {
         .request({
           url: url.url.ren_list,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -1110,39 +1090,36 @@ export default {
     out() {
       let that = this;
       that.loading1 = true;
-      that.tableList.pageSize = 1000;
+      that.tableList.pageSize = this.data.total;
       axios1
         .request({
           url: url.url.ren_list,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
             that.loading1 = false;
             this.$Notice.error({
               title: "系统提示",
-              desc: "导出数据不能为空"
+              desc: "导出数据不能为空",
             });
           } else {
             let datas = res.data.data.list;
-            datas.map(res => {
+            datas.map((res) => {
               res.edifices = res.edifices.join("/");
-              // console.log(res.edifices);
               return res;
             });
-            let columns = this.columns.filter(function(col, index) {
+            let columns = this.columns.filter(function (col, index) {
               return index < 12;
             });
-            // console.log(columns);
             this.$refs.currentRowTable.exportCsv({
               filename: "车场管理",
               columns: columns,
               original: false,
-              data: datas
+              data: datas,
             });
             that.tableList.pageSize = 10;
             that.loading1 = false;
@@ -1151,7 +1128,6 @@ export default {
     },
     //可用车位修正点击
     edit_number(data) {
-      console.log(data);
       this.parkName = data.parkName;
       this.max_temp = data.tempStallSum;
       this.max_fix = data.fixStallSum;
@@ -1169,26 +1145,23 @@ export default {
       if (!this.success_data.freeFixStallSum) {
         this.success_data.freeFixStallSum = 0;
       }
-      console.log("修正车位");
-      console.log(this.success_data);
       axios1
         .request({
           url: url.url.update_park_info_free,
           data: this.success_data,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.list();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           this.modal11 = false;
@@ -1197,7 +1170,7 @@ export default {
     },
     del() {
       this.modal11 = false;
-    }
-  }
+    },
+  },
 };
 </script>

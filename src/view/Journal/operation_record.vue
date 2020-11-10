@@ -725,7 +725,8 @@ export default {
       that.loading1 = true;
       this.datas1 = "";
       this.conditions.pageNo = 1;
-      this.conditions.pageSize = 100000;
+      this.conditions.pageSize = this.datas.total;
+      console.log(this.datas.total);
       // this.conditions1.condition.startTime = this.startTime;
       // this.conditions1.condition.endTime = this.endTime;
       // this.conditions1.condition.times = this.social.join();
@@ -746,7 +747,7 @@ export default {
             });
           } else {
             let datas = res.data.data.list.map(res => {
-              console.log(res);
+              // console.log(res);
               res.source =
                 res.source == 1
                   ? "网页+APP"
@@ -757,11 +758,11 @@ export default {
                   : "";
               return res;
             });
-            console.log(datas);
+            // console.log(datas);
             let columns = this.columns.filter(function(col, index) {
               return index < 7;
             });
-            console.log(columns);
+            // console.log(columns);
 
             this.$refs.currentRowTable.exportCsv({
               filename: "操作记录信息",

@@ -129,33 +129,49 @@
       <button class="title_btn" @click="back">返回</button>
     </div>
     <div class="basic">
-      <Divider orientation="left" style="margin-top:3%;font-size:0.9vw;">
+      <Divider orientation="left" style="margin-top: 3%; font-size: 0.9vw">
         导入EXCEL ||
-        <span style="color:#f66913;cursor:pointer" @click="down">下载Excel模板</span>
+        <span style="color: #f66913; cursor: pointer" @click="down"
+          >下载Excel模板</span
+        >
       </Divider>
       <Upload
         action
         :before-upload="handleBeforeUpload"
         accept=".xls, .xlsx"
-        style="width:10%;margin-left:2%;"
+        style="width: 10%; margin-left: 2%"
       >
-        <Button class="btnes" icon="ios-cloud-upload-outline" type="default">上传文件</Button>
+        <Button class="btnes" icon="ios-cloud-upload-outline" type="default"
+          >上传文件</Button
+        >
       </Upload>
 
       <div
         v-if="spinShows == true"
-        style="font-size:16px;color:#666;margin-bottom:10px;margin-top:15px;margin-left:2%;font-size:0.9vw;"
+        style="
+          font-size: 16px;
+          color: #666;
+          margin-bottom: 10px;
+          margin-top: 15px;
+          margin-left: 2%;
+          font-size: 0.9vw;
+        "
       >
         <Icon type="ios-stats"></Icon>
-        {{filename}}
+        {{ filename }}
       </div>
-      <Progress v-if="spinShows == true" :percent="100" :stroke-width="5" style="margin-left:2%;" />
+      <Progress
+        v-if="spinShows == true"
+        :percent="100"
+        :stroke-width="5"
+        style="margin-left: 2%"
+      />
     </div>
 
     <div class="table">
       <Table
         v-if="spinShows == true"
-        style="border:none;"
+        style="border: none"
         highlight-row
         ref="currentRowTable"
         :no-data-text="loadingText ? loadingText : '暂无数据'"
@@ -171,8 +187,9 @@
         icon="ios-cloud-upload-outline"
         type="default"
         :loading="loading"
-        style="font-size:0.9vw;"
-      >批量提交</Button>
+        style="font-size: 0.9vw"
+        >批量提交</Button
+      >
     </div>
     <Spin fix v-if="loadinges"></Spin>
   </div>
@@ -198,49 +215,44 @@ export default {
       loadinges: false,
       loadingText: "",
       spinShows: false,
-      loading: false
+      loading: false,
     };
   },
   created() {
-    console.log(this.$route.query);
+    // console.log(this.$route.query);
   },
   methods: {
     down() {
-      console.log(url.url.excel);
+      // console.log(url.url.excel);
       window.location.href = url.url.excel + "/固定车位信息-车场名称.xlsx";
     },
     //批量提交
     Submission() {
-      console.log("提交");
       this.loading = true;
-      // console.log(this.tableData.length);
       if (this.tableData.length == 0) {
         this.$Notice.error({
           title: "系统提示",
-          desc: "Excel中未包含导入数据"
+          desc: "Excel中未包含导入数据",
         });
         this.loading = false;
       } else {
-        console.log("开始请求");
-        console.log(this.tableData);
         axios1
           .request({
             url: url.url.batch_save,
             data: this.tableData,
-            method: "post"
+            method: "post",
           })
-          .then(res => {
-            console.log(res);
+          .then((res) => {
             if (res.data.code == 200) {
               this.$Notice.success({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
               this.$router.go(-1);
             } else {
               this.$Notice.error({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
             }
             this.loading = false;
@@ -248,13 +260,9 @@ export default {
       }
     },
     handleBeforeUpload(file) {
-      console.log(file.name);
       this.loadinges = true;
       this.spinShows = false;
-      const fileExt = file.name
-        .split(".")
-        .pop()
-        .toLocaleLowerCase();
+      const fileExt = file.name.split(".").pop().toLocaleLowerCase();
       if (fileExt === "xlsx" || fileExt === "xls") {
         this.readFile(file);
         this.file = file;
@@ -264,42 +272,35 @@ export default {
           desc:
             "文件：" +
             file.name +
-            "不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。"
+            "不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。",
         });
       }
       return false;
     },
     // 读取文件
     readFile(file) {
-      console.log(file);
       this.loadinges = true;
       const reader = new FileReader();
       reader.readAsArrayBuffer(file);
-      reader.onloadstart = e => {
-        // console.log(e);
+      reader.onloadstart = (e) => {
         this.uploadLoading = true;
         this.tableLoading = true;
         this.showProgress = true;
       };
 
-      reader.onprogress = e => {
-        // console.log(e);
+      reader.onprogress = (e) => {
         this.progressPercent = Math.round((e.loaded / e.total) * 100);
       };
-      reader.onerror = e => {
+      reader.onerror = (e) => {
         this.$Message.error("文件读取出错");
       };
-      reader.onload = e => {
-        // console.log(e);
+      reader.onload = (e) => {
         let formatSuccess = true;
         const data = e.target.result;
-        // console.log(data);
         const { header, results } = excel.read(data, "array");
         this.loadinges = true;
         console.log(header, results);
         results.map((res, index, arry) => {
-          // console.log(typeof res["有效期止*"] == "number");
-          // console.log(res["车牌号"]);
           if (res["车牌号"]) {
             res["车牌号"] = res["车牌号"].replace(/\s*/g, "");
             res["车牌号"] = res["车牌号"].replace("，", ",");
@@ -310,15 +311,11 @@ export default {
           }
         });
 
-        // if (header.indexOf("车位号*") == -1 && header.indexOf("车位号") == -1) {
-        //   formatSuccess = false;
-        // }
         if (header.indexOf("车牌号*") == -1 && header.indexOf("车牌号") == -1) {
           formatSuccess = false;
         }
         if (formatSuccess) {
-          const tableTitle = header.map(item => {
-            // console.log(item);
+          const tableTitle = header.map((item) => {
             return {
               title: item,
               key:
@@ -332,7 +329,7 @@ export default {
                   ? "plateNumber"
                   : "",
               align: "center",
-              tooltip: true
+              tooltip: true,
               // width:
               //   item == "车位号*"
               //     ? "100"
@@ -345,11 +342,8 @@ export default {
               //     : ""
             };
           });
-          console.log(tableTitle);
-          // console.log(results)
           let tableData = [];
-          results.forEach(item => {
-            // console.log(item);
+          results.forEach((item) => {
             let obj = {
               stallCode:
                 item["车位号*"] == undefined && item["车位号"] == undefined
@@ -366,15 +360,11 @@ export default {
                   : item["车牌号*"],
               plateFlag: 1,
               parkCode: this.$route.query.parkCode,
-              id: ""
+              id: "",
             };
-            // console.log(obj);
             tableData.push(obj);
-            // this.todata.params.push(obj);
-            // console.log(this.tableData);
           });
-          tableData.map(res => {
-            // console.log(res);
+          tableData.map((res) => {
             // if (res.stallNames == "") {
             //   this.$Notice.error({
             //     title: "系统提示",
@@ -385,21 +375,19 @@ export default {
             if (res.plateNos == "") {
               this.$Notice.error({
                 title: "系统提示",
-                desc: "车牌号码不能为空"
+                desc: "车牌号码不能为空",
               });
               this.success = false;
             }
           });
           if (this.success != false) {
-            setTimeout(res => {
+            setTimeout((res) => {
               this.$Message.success("文件读取成功");
             }, 500);
             this.filename = file.name;
             this.tableTitle = tableTitle;
             this.tableData = tableData;
             this.spinShows = true;
-            console.log(this.tableTitle);
-            console.log(this.tableData);
           }
           this.loadinges = false;
           this.success = true;
@@ -407,7 +395,7 @@ export default {
           this.loadinges = false;
           this.$Notice.error({
             title: "系统提示",
-            desc: "文件格式不符合模板"
+            desc: "文件格式不符合模板",
           });
           this.tableData = [];
         }
@@ -416,7 +404,7 @@ export default {
     //返回上一页
     back() {
       this.$router.go(-1);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -357,113 +357,127 @@ label {
       <div class="bottom">
         <div class="bottom1">
           <div class="total_data1">
-            <label for style="color:red;">*</label>
+            <label for style="color: red">*</label>
             <label for class="label1">诱导屏编码</label>：
             <Input
-              style="width:60%;"
+              style="width: 60%"
               v-model="datas.screenCode"
               :readonly="readonly"
               v-if="!readonly"
             />
-            <span v-if="readonly">{{datas.screenCode}}</span>
+            <span v-if="readonly">{{ datas.screenCode }}</span>
           </div>
           <div class="total_data2">
-            <label for style="color:white;">*</label>
+            <label for style="color: white">*</label>
             <label for class="label2">屏体数</label>：
-            <span class="span1">{{data1.screenSum}}</span>
+            <span class="span1">{{ data1.screenSum }}</span>
           </div>
           <div class="total_data2">
             <label for class="label3">厂商ID</label>：
-            <span class="span1">{{data1.factoryId}}</span>
+            <span class="span1">{{ data1.factoryId }}</span>
           </div>
           <div class="total_data3">
             <label for class="label4">固件版本</label>：
-            <span class="span1">{{data1.screenVersion}}</span>
+            <span class="span1">{{ data1.screenVersion }}</span>
           </div>
         </div>
         <div class="bottom1">
           <div class="total_data1">
-            <label for style="color:white;">*</label>
+            <label for style="color: white">*</label>
             <label for class="label1">网络类型</label>：
-            <span class="span">{{data1.screenModule}}</span>
+            <span class="span">{{ data1.screenModule }}</span>
           </div>
           <div class="total_data2">
-            <label for style="color:white;">*</label>
+            <label for style="color: white">*</label>
             <label for class="label2">状态</label>：
-            <span class="span1">{{data1.screenOnlineStatus == 0 ? '离线' : '在线'}}</span>
+            <span class="span1">{{
+              data1.screenOnlineStatus == 0 ? "离线" : "在线"
+            }}</span>
           </div>
           <div class="total_data2">
             <label for class="label3">信号强度</label>：
-            <span class="span1">{{data1.screenSignal}}</span>
+            <span class="span1">{{ data1.screenSignal }}</span>
           </div>
         </div>
 
         <div class="bottom1">
           <div class="total_data1">
-            <label for style="color:white;">*</label>
+            <label for style="color: white">*</label>
             <label for class="label1">图纸编号</label>：
-            <Input style="width:60%" v-model="datas.drawNumber" />
+            <Input style="width: 60%" v-model="datas.drawNumber" />
           </div>
           <div class="total_data2">
-            <label for style="color:white;">*</label>
+            <label for style="color: white">*</label>
             <label for class="label2">运营商</label>：
             <!-- <Input style="width:" v-model="datas.operators" /> -->
-            <Select v-model="datas.operators" style="width:65%" clearable>
+            <Select v-model="datas.operators" style="width: 65%" clearable>
               <Option
                 v-for="item in operators"
                 :value="item.value"
                 :key="item.value"
-              >{{ item.value }}</Option>
+                >{{ item.value }}</Option
+              >
             </Select>
           </div>
           <div class="total_data2">
             <label class="label2" for>SIM卡号</label>：
-            <Input style="width:65%;" v-model="datas.screenSim" />
+            <Input style="width: 65%" v-model="datas.screenSim" />
           </div>
           <div class="total_data3">
             <label class="label4" for>屏幕亮度</label>：
-            <InputNumber :max="50" :min="-50" v-model="datas.screenBright"></InputNumber>
+            <InputNumber
+              :max="50"
+              :min="-50"
+              v-model="datas.screenBright"
+            ></InputNumber>
           </div>
         </div>
 
         <div class="bottom1">
           <div class="total_data1">
-            <label for style="color:red;">*</label>
+            <label for style="color: red">*</label>
             <label for class="label1">点位编号</label>：
-            <Input style="width:60%" v-model="datas.pointNumber" />
+            <Input style="width: 60%" v-model="datas.pointNumber" />
           </div>
           <div class="total_data2">
-            <label for style="color:red;">*</label>
+            <label for style="color: red">*</label>
             <label for class="label2">位置描述</label>：
-            <Input style="width:65%" v-model="datas.screenAddress" />
+            <Input style="width: 65%" v-model="datas.screenAddress" />
           </div>
           <div class="total_data2">
             <label class="label3" for>经度</label>：
-            <Input style="width:65%" v-model="datas.screenLongitude" />
+            <Input style="width: 65%" v-model="datas.screenLongitude" />
           </div>
           <div class="total_data3">
             <label class="label4" for>纬度</label>：
-            <Input style="width:55%;" v-model="datas.screenLatitude" />
+            <Input style="width: 55%" v-model="datas.screenLatitude" />
           </div>
         </div>
         <div class="bottom2">
           <div class="total_datas">
-            <label for style="color:red;">*</label>
+            <label for style="color: red">*</label>
             <label for class="label1s">诱导屏车场</label>：
             <div class="add_car">
-              <div class="dies" v-for="(item,index) in data.plateNo" :key="index">
+              <div
+                class="dies"
+                v-for="(item, index) in data.plateNo"
+                :key="index"
+              >
                 <Tag
                   class="tag"
                   type="border"
                   checkable
                   closable
-                  @on-change="updata(item,index)"
+                  @on-change="updata(item, index)"
                   @on-close="handleClose4(item)"
-                >{{item.parkName}}</Tag>
+                  >{{ item.parkName }}</Tag
+                >
               </div>
               <div class="dis">
                 <div class="add_car_btn" @click="add_car">添加车场</div>
-                <div style="margin-left:15%;">(在诱导屏上显示的对应车场数字，顺序为由上至下)</div>
+                <div style="margin-left: 15%">
+                  (在诱导屏上显示的对应车场数字，顺序为由上至下)
+                </div>
               </div>
             </div>
           </div>
@@ -472,7 +486,9 @@ label {
     </div>
 
     <div v-if="spinShow == false" class="btn">
-      <Button class="button1" @click="Preservation" :loading="loading1">保存</Button>
+      <Button class="button1" @click="Preservation" :loading="loading1"
+        >保存</Button
+      >
       <button class="button2" @click="cancel">取消</button>
     </div>
 
@@ -494,17 +510,18 @@ label {
       <div class="contents">
         <div class="module_title">增加车场</div>
         <div class="tops1">
-          <label for style="color:red;">*</label>
+          <label for style="color: red">*</label>
           <label for>车场名称：</label>
-          <i-select v-model="value_parkCode" filterable style="width: 60%;">
+          <i-select v-model="value_parkCode" filterable style="width: 60%">
             <i-option
-              v-for="(item,index) in parkCodeList"
+              v-for="(item, index) in parkCodeList"
               :key="index"
               :value="item.parkCode"
-            >{{ item.parkName }}</i-option>
+              >{{ item.parkName }}</i-option
+            >
           </i-select>
         </div>
-        <hr style="border:1.5px solid #c5c8ce" />
+        <hr style="border: 1.5px solid #c5c8ce" />
         <div class="bottoms">
           <button class="save" @click="save">确定</button>
           <button class="cancels" @click="cancels">取消</button>
@@ -531,18 +548,18 @@ export default {
       parkCodeList: [], //车场名称
       value_parkCode: "",
       data: {
-        plateNo: []
+        plateNo: [],
       },
       operators: [
         {
-          value: "移动"
+          value: "移动",
         },
         {
-          value: "联通"
+          value: "联通",
         },
         {
-          value: "电信"
-        }
+          value: "电信",
+        },
       ],
       datas: {
         screenCode: "", //诱导屏编码
@@ -556,14 +573,14 @@ export default {
         screenSim: "", //sim卡号
         drawNumber: "", //图纸编号
         operators: "", //运营商
-        screenBright: 0 //屏幕亮度
-      }
+        screenBright: 0, //屏幕亮度
+      },
     };
   },
   created() {
-    console.log(this.$route.query);
+    // console.log(this.$route.query);
     if (JSON.stringify(this.$route.query) != "{}") {
-      console.log("不等于空");
+      // console.log("不等于空");
       this.readonly = true;
       this.list();
     } else {
@@ -578,22 +595,20 @@ export default {
       axios
         .request({
           url: url.url.car_name,
-          method: "get"
+          method: "get",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.parkCodeList = res.data.data;
           axios
             .request({
               url: url.url.find_screen,
               params: {
-                id: this.$route.query.id
+                id: this.$route.query.id,
               },
-              method: "get"
+              method: "get",
             })
-            .then(res => {
+            .then((res) => {
               this.spinShow = false;
-              console.log(res.data.data);
               let data = res.data.data;
               this.datas.screenCode = data.screenCode;
               this.datas.pointNumber = data.pointNumber;
@@ -607,11 +622,9 @@ export default {
               this.datas.operators = data.operators;
               this.datas.screenBright = data.screenBright;
               this.data1 = data;
-              // console.log(res);
-              this.datas.parkCodeList.map(reson => {
-                this.parkCodeList.map(res => {
+              this.datas.parkCodeList.map((reson) => {
+                this.parkCodeList.map((res) => {
                   if (res.parkCode == reson) {
-                    console.log(reson);
                     this.data.plateNo.push(res);
                   }
                 });
@@ -624,16 +637,14 @@ export default {
       axios
         .request({
           url: url.url.car_name,
-          method: "get"
+          method: "get",
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
           this.parkCodeList = res.data.data;
         });
     },
     //添加车场
     add_car() {
-      // console.log("添加车场");\
       if (this.data.plateNo.length >= 8) {
         this.$Message.warning("诱导屏车场数量上限为8个");
       } else {
@@ -642,15 +653,12 @@ export default {
     },
     //保存车场
     save() {
-      console.log("保存车场");
       let car = this.value_parkCode;
       if (this.value_parkCode) {
         this.parkCodeList.map((res, index, arry) => {
           if (res.parkCode == car) {
-            // console.log(res);
             let name = res.parkName;
             if (this.datas.parkCodeList.length == 0) {
-              // console.log("222222");
               this.data.plateNo.push(res);
               this.datas.parkCodeList.push(res.parkCode);
               this.value_parkCode = "";
@@ -660,7 +668,6 @@ export default {
               this.datas.parkCodeList.map((reson, indexs, arrys) => {
                 if (reson == car) {
                   this.$Message.warning("车场已存在,请勿重复添加");
-                  // console.log("555555");
                   svn = false;
                   return;
                 }
@@ -691,7 +698,6 @@ export default {
     },
     //取消保存
     cancels() {
-      console.log("取消保存");
       this.show = false;
       this.tag_index = "";
       this.value_parkCode = "";
@@ -713,7 +719,6 @@ export default {
     Preservation() {
       let that = this;
       this.loading1 = true;
-      console.log("保存");
       if (!this.datas.screenCode) {
         this.$Message.warning("请填写诱导屏编码");
         this.loading1 = false;
@@ -728,51 +733,46 @@ export default {
         this.loading1 = false;
       } else {
         if (this.readonly == false) {
-          console.log("走新增");
           axios1
             .request({
               url: url.url.save_screen,
               data: this.datas,
-              method: "post"
+              method: "post",
             })
-            .then(res => {
-              console.log(res);
+            .then((res) => {
               if (res.data.code == 200) {
                 this.$Notice.success({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
                 this.$router.go(-1);
               } else {
                 this.$Notice.error({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
               }
               this.loading1 = false;
             });
         } else {
-          console.log("走编辑");
-          console.log(this.datas);
           this.datas.id = this.$route.query.id;
           axios1
             .request({
               url: url.url.modify_scree,
               data: this.datas,
-              method: "post"
+              method: "post",
             })
-            .then(res => {
-              console.log(res);
+            .then((res) => {
               if (res.data.code == 200) {
                 this.$Notice.success({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
                 this.$router.go(-1);
               } else {
                 this.$Notice.error({
                   title: "系统提示",
-                  desc: res.data.message
+                  desc: res.data.message,
                 });
               }
               this.loading1 = false;
@@ -785,7 +785,6 @@ export default {
       this.tag_index = index;
       this.value_parkCode = data.parkCode;
       this.show = true;
-      console.log(data, index);
     },
     //取消
     cancel() {
@@ -793,15 +792,13 @@ export default {
     },
     //确定取消编辑
     success2() {
-      console.log("确定取消编辑");
       this.show2 = false;
       this.$router.go(-1);
     },
     //取消取消编辑
     canceles2() {
-      console.log("取消取消编辑");
       this.show2 = false;
-    }
-  }
+    },
+  },
 };
 </script>

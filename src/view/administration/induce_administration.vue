@@ -381,31 +381,47 @@
     <div class="search">
       <div class="top">
         <div class="input1">
-          <div class="text">车场名称</div>：
-          <i-select v-model="carname" filterable style="width:200px" clearable>
+          <div class="text">车场名称</div>
+          ：
+          <i-select v-model="carname" filterable style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in carnames"
+              v-for="(item, index) in carnames"
               :key="index"
               :value="item.parkCode"
-            >{{item.parkName}}</i-option>
+              >{{ item.parkName }}</i-option
+            >
           </i-select>
         </div>
         <div class="input2">
-          <div class="text">诱导屏编号</div>：
-          <Input v-model="onename" class="se" type="text" placeholder="请输入诱导屏编号" />
+          <div class="text">诱导屏编号</div>
+          ：
+          <Input
+            v-model="onename"
+            class="se"
+            type="text"
+            placeholder="请输入诱导屏编号"
+          />
         </div>
         <div class="input2">
-          <div class="text">点位编号</div>：
-          <Input v-model="point_number" class="se" type="text" placeholder="请输入一体机编号" />
+          <div class="text">点位编号</div>
+          ：
+          <Input
+            v-model="point_number"
+            class="se"
+            type="text"
+            placeholder="请输入一体机编号"
+          />
         </div>
         <div class="input1">
-          <div class="text">状态</div>：
-          <i-select v-model="search_state" style="width:200px" clearable>
+          <div class="text">状态</div>
+          ：
+          <i-select v-model="search_state" style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in search_states"
+              v-for="(item, index) in search_states"
               :key="index"
               :value="item.id"
-            >{{ item.value }}</i-option>
+              >{{ item.value }}</i-option
+            >
           </i-select>
         </div>
       </div>
@@ -443,11 +459,11 @@
         <Input
           @input="number"
           :value="numbers"
-          style="width: 50px;margin-left:5px;margin-right:5px;"
+          style="width: 50px; margin-left: 5px; margin-right: 5px"
           placeholder="1"
         />
         <div>页</div>
-        <Button style="margin-left:20px;" @click="jump">跳转</Button>
+        <Button style="margin-left: 20px" @click="jump">跳转</Button>
       </div>
     </div>
     <!-- loading -->
@@ -456,8 +472,10 @@
     </div>
     <!-- 车牌号全部显示（弹框） -->
     <Modal v-model="modal10" :closable="false">
-      <p class="ellipsis" v-for="(item,index) in module_ellipsis" :key="index">{{item}}</p>
-      <div slot="footer" style="width:100%;height:35px;textAlign:center;">
+      <p class="ellipsis" v-for="(item, index) in module_ellipsis" :key="index">
+        {{ item }}
+      </p>
+      <div slot="footer" style="width: 100%; height: 35px; textalign: center">
         <button class="close" @click="del">关闭</button>
       </div>
     </Modal>
@@ -469,7 +487,12 @@
           <div class="content_btnii">
             <div class="input3">
               <div class="text2">诱导屏编号:</div>
-              <Input v-model="modal_onename" class="seii" type="text" placeholder="请输入诱导屏编号" />
+              <Input
+                v-model="modal_onename"
+                class="seii"
+                type="text"
+                placeholder="请输入诱导屏编号"
+              />
             </div>
             <Button class="content_btnsii" @click="sear1">查询</Button>
             <Button class="content_btnsii" @click="modal_add">增加</Button>
@@ -500,11 +523,11 @@
               <Input
                 @input="number1"
                 :value="numbers1"
-                style="width: 50px;margin-left:5px;margin-right:5px;"
+                style="width: 50px; margin-left: 5px; margin-right: 5px"
                 placeholder="1"
               />
               <div>页</div>
-              <Button style="margin-left:20px;" @click="jump1">跳转</Button>
+              <Button style="margin-left: 20px" @click="jump1">跳转</Button>
             </div>
           </div>
         </div>
@@ -515,7 +538,12 @@
       <div class="contentes_delete">
         <div class="content_top_delete">确定删除？</div>
         <div class="content_bottom_delete">
-          <Button class="success_delete" :loading="loading_delete" @click="success_delete">确定</Button>
+          <Button
+            class="success_delete"
+            :loading="loading_delete"
+            @click="success_delete"
+            >确定</Button
+          >
           <Button class="canceles_delete" @click="canceles_delete">取消</Button>
         </div>
       </div>
@@ -534,12 +562,12 @@ export default {
       search_states: [
         {
           id: 0,
-          value: "离线"
+          value: "离线",
         },
         {
           id: 1,
-          value: "在线"
-        }
+          value: "在线",
+        },
       ],
       deletes: "",
       id_delete: "",
@@ -570,19 +598,19 @@ export default {
           parkCode: "",
           screenCode: "",
           pointNumber: "",
-          screenOnlineStatus: ""
+          screenOnlineStatus: "",
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       condition1: {
         condition: {
           bindType: 0,
           parkCode: "",
-          screenCode: ""
+          screenCode: "",
         },
         pageNo: 1,
-        pageSize: 5
+        pageSize: 5,
       },
       data: "",
       show: "",
@@ -593,14 +621,14 @@ export default {
           //   sortable: 'custom',
           key: "screenCode",
           tooltip: "true",
-          minWidth: 160
+          minWidth: 160,
         },
         {
           title: "点位编号",
           align: "center",
           //   sortable: 'custom',
           key: "pointNumber",
-          minWidth: 150
+          minWidth: 150,
         },
         {
           title: "诱导屏位置",
@@ -608,14 +636,14 @@ export default {
           //   sortable: 'custom',
           tooltip: "true",
           key: "screenAddress",
-          minWidth: 220
+          minWidth: 220,
         },
         {
           title: "屏体数",
           align: "center",
           //   sortable: 'custom',
           key: "screenSum",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "诱导屏车场",
@@ -642,11 +670,11 @@ export default {
                         textAlign: "center",
                         // border: "1px solid #464c5b",
                         borderRadius: "5px",
-                        margin: "0 auto"
+                        margin: "0 auto",
                       },
                       domProps: {
-                        title: params.row.plateNos
-                      }
+                        title: params.row.plateNos,
+                      },
                     },
                     value
                   );
@@ -660,11 +688,11 @@ export default {
                         textAlign: "center",
                         // border: "1px solid #464c5b",
                         borderRadius: "5px",
-                        margin: "0 auto"
+                        margin: "0 auto",
                       },
                       domProps: {
-                        title: params.row.plateNos
-                      }
+                        title: params.row.plateNos,
+                      },
                     },
                     " / " + value
                   );
@@ -676,13 +704,13 @@ export default {
                         style: {
                           fontSize: "20px",
                           cursor: "pointer",
-                          display: "inline"
+                          display: "inline",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       "..."
                     ),
@@ -694,22 +722,22 @@ export default {
                           cursor: "pointer",
                           display: "inline",
                           // border: "1px solid red",
-                          marginBottom: "20px"
+                          marginBottom: "20px",
                         },
                         on: {
                           click: () => {
                             this.showEllipsis(params.row.id);
-                          }
-                        }
+                          },
+                        },
                       },
                       clist.length
-                    )
+                    ),
                   ]);
                 }
               });
             }
             return list;
-          }
+          },
         },
         {
           title: "状态",
@@ -723,26 +751,32 @@ export default {
               "label",
               {
                 style: {
-                  color: params.row.screenOnlineStatus == 1 ? "green" : "red"
-                }
+                  color: params.row.screenOnlineStatus == 1 ? "green" : "red",
+                },
               },
               state === 0 ? "离线" : state === 1 ? "在线" : ""
             );
-          }
+          },
+        },
+        {
+          title: "时间",
+          align: "center",
+          key: "date",
+          minWidth: 200,
         },
         {
           title: "运营商",
           align: "center",
           //   sortable: 'custom',
           key: "operators",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "信号强度",
           align: "center",
           //   sortable: 'custom',
           key: "screenSignal",
-          minWidth: 110
+          minWidth: 110,
         },
         {
           title: "操作",
@@ -764,26 +798,26 @@ export default {
                   size: "large",
                   // disabled:
                   //   params.row.fixedId === null,
-                  value: params.row.screenFlag === 1 // 控制开关的打开或关闭状态，官网文档属性是value
+                  value: params.row.screenFlag === 1, // 控制开关的打开或关闭状态，官网文档属性是value
                 },
                 style: {
                   // background:'#f66913',
                   // border:'1px solid #f66913'
-                  marginRight: "10px"
+                  marginRight: "10px",
                 },
                 scopedSlots: {
                   open: () => h("span", "正常"),
-                  close: () => h("span", "禁用")
+                  close: () => h("span", "禁用"),
                 },
                 on: {
-                  "on-change": state => {
+                  "on-change": (state) => {
                     if (state) {
                       this.enableParking(parking.id);
                     } else {
                       this.disabledParking(parking.id);
                     }
-                  }
-                }
+                  },
+                },
               }),
               h(
                 "span",
@@ -791,13 +825,13 @@ export default {
                   style: {
                     size: 26,
                     cursor: "pointer",
-                    marginRight: "5px"
+                    marginRight: "5px",
                   },
                   on: {
                     click: () => {
                       this.edit(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "编辑"
               ),
@@ -806,23 +840,23 @@ export default {
                 {
                   style: {
                     size: 26,
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.delete(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "删除"
-              )
+              ),
             ]);
             // }
             if (params.row.type != 0) {
               return menu;
             }
-          }
-        }
+          },
+        },
       ],
       columns1: [
         {
@@ -830,7 +864,7 @@ export default {
           align: "center",
           //   sortable: 'custom',
           key: "screenCode",
-          minWidth: 120
+          minWidth: 120,
         },
         {
           title: "状态",
@@ -844,12 +878,12 @@ export default {
               "label",
               {
                 style: {
-                  color: params.row.screenOnlineStatus == 1 ? "green" : "red"
-                }
+                  color: params.row.screenOnlineStatus == 1 ? "green" : "red",
+                },
               },
               state === 0 ? "离线" : state === 1 ? "在线" : ""
             );
-          }
+          },
         },
         // {
         //   title: "运营商",
@@ -863,14 +897,14 @@ export default {
           align: "center",
           //   sortable: 'custom',
           key: "screenSignal",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "厂商ID",
           align: "center",
           //   sortable: 'custom',
           key: "factoryId",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "操作",
@@ -891,17 +925,17 @@ export default {
                   props: {
                     // type: 'md-eye',
                     size: 26,
-                    color: "#19be6b"
+                    color: "#19be6b",
                   },
                   style: {
                     marginRight: "5px",
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.modal_edit(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "编辑"
               ),
@@ -910,24 +944,24 @@ export default {
                 {
                   style: {
                     size: 26,
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.modal_del(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "删除"
-              )
+              ),
             ]);
             // }
             return menu;
-          }
-        }
+          },
+        },
       ],
       data: { total: 0, list: [], loading: true },
-      data1: { total: 0, list: [], loading: true }
+      data1: { total: 0, list: [], loading: true },
     };
   },
   created() {
@@ -937,7 +971,7 @@ export default {
     this.floores();
   },
   mounted() {
-    this.$root.event.$on("logout", res => {
+    this.$root.event.$on("logout", (res) => {
       // console.log(res)
       this.show = res;
     });
@@ -948,9 +982,9 @@ export default {
       axios
         .request({
           url: url.url.car_name,
-          method: "get"
+          method: "get",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.carnames = res.data.data;
         });
@@ -966,8 +1000,8 @@ export default {
       this.$router.push({
         path: "/induce_administration_add",
         query: {
-          id: id
-        }
+          id: id,
+        },
       });
     },
     //弹框删除
@@ -986,7 +1020,7 @@ export default {
     modal_add() {
       console.log("增加");
       this.$router.push({
-        path: "/induce_administration_add"
+        path: "/induce_administration_add",
       });
     },
     //弹框查询
@@ -1007,9 +1041,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -1032,9 +1066,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -1055,9 +1089,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -1072,7 +1106,7 @@ export default {
     //显示省略车牌号
     showEllipsis(id) {
       console.log(id);
-      this.data.list.map(res => {
+      this.data.list.map((res) => {
         // console.log(res);
         if (res.id == id) {
           if (res.parkNameList) {
@@ -1094,9 +1128,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.numbers = data;
           if (res.data.data.list.length == 0) {
@@ -1119,9 +1153,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           this.numbers1 = data;
@@ -1185,9 +1219,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           that.pages = Number(this.numbers);
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -1213,9 +1247,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition1,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.pages1 = Number(this.numbers1);
           that.spinShow = false;
@@ -1235,9 +1269,9 @@ export default {
       axios
         .request({
           url: url.url.logout,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.logout == true) {
             sessionStorage.setItem("logout", 1);
@@ -1246,7 +1280,7 @@ export default {
           } else {
             this.$Notice.error({
               title: res.data.message,
-              desc: ""
+              desc: "",
             });
           }
         });
@@ -1263,21 +1297,21 @@ export default {
           url: url.url.on_off_screen,
           data: {
             id: id,
-            screenFlag: 1
+            screenFlag: 1,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
 
@@ -1292,21 +1326,21 @@ export default {
           url: url.url.on_off_screen,
           params: {
             id: id,
-            screenFlag: 0
+            screenFlag: 0,
           },
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
 
@@ -1319,8 +1353,8 @@ export default {
       this.$router.push({
         path: "/induce_administration_add",
         query: {
-          id: id
-        }
+          id: id,
+        },
       });
     },
     //取消删除
@@ -1345,16 +1379,16 @@ export default {
           .request({
             url: url.url.delete_screen,
             params: {
-              id: this.id_delete
+              id: this.id_delete,
             },
-            method: "delete"
+            method: "delete",
           })
-          .then(res => {
+          .then((res) => {
             console.log(res);
             if (res.data.code == 200) {
               this.$Notice.success({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
               if (this.deletes == 2) {
                 this.list1();
@@ -1364,7 +1398,7 @@ export default {
             } else {
               this.$Notice.error({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
             }
             this.deletes = "";
@@ -1376,23 +1410,23 @@ export default {
           .request({
             url: url.url.clear_screen,
             params: {
-              id: this.id_delete
+              id: this.id_delete,
             },
-            method: "delete"
+            method: "delete",
           })
-          .then(res => {
+          .then((res) => {
             console.log(res);
             if (res.data.code == 200) {
               this.$Notice.success({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
               this.list1();
               this.list();
             } else {
               this.$Notice.error({
                 title: "系统提示",
-                desc: res.data.message
+                desc: res.data.message,
               });
             }
             this.deletes = "";
@@ -1438,9 +1472,9 @@ export default {
         .request({
           url: url.url.search_screen,
           data: this.condition,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -1456,14 +1490,15 @@ export default {
     out() {
       let that = this;
       that.loading1 = true;
-      this.condition.pageSize = 1000;
+      this.condition.pageSize = this.data.total;
+      // console.log(this.data.total);
       axios1
         .request({
           url: url.url.search_screen,
           data: this.condition,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -1471,10 +1506,10 @@ export default {
             that.loading1 = false;
             this.$Notice.error({
               title: "系统提示",
-              desc: "导出数据不能为空"
+              desc: "导出数据不能为空",
             });
           } else {
-            let datas = res.data.data.list.map(res => {
+            let datas = res.data.data.list.map((res) => {
               // console.log(res);
               res.screenOnlineStatus =
                 res.screenOnlineStatus == 0
@@ -1487,7 +1522,7 @@ export default {
               res.screenSum = res.screenSum == null ? "0" : res.screenSum;
               return res;
             });
-            let columns = this.columns.filter(function(col, index) {
+            let columns = this.columns.filter(function (col, index) {
               return index < 8;
             });
 
@@ -1495,13 +1530,13 @@ export default {
               filename: "诱导屏管理",
               columns: columns,
               original: false,
-              data: datas
+              data: datas,
             });
             that.loading1 = false;
             this.condition.pageSize = 10;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

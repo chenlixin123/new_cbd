@@ -3,32 +3,53 @@
     <Menu
       theme="dark"
       :active-name="activemenu"
-      style="width:100%;height:100%;font-size:0.6vw; background: #161b30;"
+      style="width: 100%; height: 100%; font-size: 0.6vw; background: #161b30"
       @on-select="tap"
     >
       <!-- 系统分析导航 -->
       <MenuGroup
         title="统计分析"
-        v-if="holistic_analysis || new_holistic_analysis || newyard_analysis || operation_analysis"
+        v-if="
+          holistic_analysis ||
+          new_holistic_analysis ||
+          newyard_analysis ||
+          operation_analysis ||
+          new_cbd_one ||
+          new_cbd_history
+        "
       >
-        <MenuItem name="1" v-if="holistic_analysis">
+        <MenuItem name="one" v-if="new_cbd_one">
           <Icon type="document-text"></Icon>实时分析
         </MenuItem>
+        <MenuItem name="two" v-if="new_cbd_history">
+          <Icon type="document-text"></Icon>历史总览
+        </MenuItem>
+        <MenuItem name="1" v-if="holistic_analysis">
+          <Icon type="document-text"></Icon>实时地图
+        </MenuItem>
         <MenuItem name="2" v-if="new_holistic_analysis">
-          <Icon type="chatbubbles"></Icon>实时分析
+          <Icon type="chatbubbles"></Icon>实时分析合
         </MenuItem>
         <!-- 15 新历史总览 -->
         <MenuItem name="15" v-if="newyard_analysis">
-          <Icon type="chatbubbles"></Icon>历史总览
+          <Icon type="chatbubbles"></Icon>历史总览合
         </MenuItem>
         <MenuItem name="3" v-if="operation_analysis">
           <Icon type="document-text"></Icon>运维大屏
+        </MenuItem>
+        <MenuItem name="three" v-if="three_city">
+          <Icon type="document-text"></Icon>三维CBD
         </MenuItem>
       </MenuGroup>
       <!-- 系统管理导航 -->
       <MenuGroup
         title="系统管理"
-        v-if="car_administration || one_administration || induce_administration || car_administrations"
+        v-if="
+          car_administration ||
+          one_administration ||
+          induce_administration ||
+          car_administrations
+        "
       >
         <MenuItem name="4" v-if="car_administration">
           <Icon type="heart"></Icon>车场管理
@@ -44,7 +65,10 @@
         </MenuItem>
       </MenuGroup>
       <!-- 账号权限导航 -->
-      <MenuGroup title="账号权限" v-if="account_Jurisdiction || role_Jurisdiction || menu_Jurisdiction">
+      <MenuGroup
+        title="账号权限"
+        v-if="account_Jurisdiction || role_Jurisdiction || menu_Jurisdiction"
+      >
         <MenuItem name="7" v-if="account_Jurisdiction">
           <Icon type="heart-broken"></Icon>账号管理
         </MenuItem>
@@ -58,7 +82,12 @@
       <!-- 日志报表导航 -->
       <MenuGroup
         title="日志报表"
-        v-if="system_Journal || equipment_Journal || operation_Journal || operation_record"
+        v-if="
+          system_Journal ||
+          equipment_Journal ||
+          operation_Journal ||
+          operation_record
+        "
       >
         <!-- <MenuItem name="9" v-if="system_Journal">
           <Icon type="heart-broken"></Icon>系统日志
@@ -75,9 +104,7 @@
       </MenuGroup>
       <!-- 系统设置导航 -->
       <MenuGroup title="系统设置" v-if="system_setup">
-        <MenuItem name="10">
-          <Icon type="heart"></Icon>通用设置
-        </MenuItem>
+        <MenuItem name="10"> <Icon type="heart"></Icon>通用设置 </MenuItem>
       </MenuGroup>
     </Menu>
   </div>
@@ -89,6 +116,9 @@ export default {
       data: "",
       activemenu: "4",
       menuSet: "",
+      three_city: false,
+      new_cbd_one: false, //实时分析（分屏）
+      new_cbd_history: false, //历史总览（分屏）
       holistic_analysis: false, //实时分析
       new_holistic_analysis: false, //新实时分析
       newyard_analysis: false, //新历史总览
@@ -104,14 +134,20 @@ export default {
       equipment_Journal: false, //设备日志
       operation_Journal: false, //运维任务
       operation_record: false, //操作记录
-      system_setup: false //通用设置
+      system_setup: false, //通用设置
     };
   },
   created() {
     // console.log('我是导航')
-    this.menuSet = JSON.parse(sessionStorage.getItem("menuSet"));
-    this.menuSet.map(res => {
-      // console.log(res);
+    this.menuSet = JSON.parse(localStorage.getItem("menuSet"));
+    this.menuSet.map((res) => {
+      console.log(res);
+      if (res == "new_cbd_one") {
+        this.new_cbd_one = true;
+      }
+      if (res == "new_cbd_history") {
+        this.new_cbd_history = true;
+      }
       if (res == "holistic_analysis") {
         this.holistic_analysis = true;
       }
@@ -162,6 +198,9 @@ export default {
       }
       if (res == "system_setup") {
         this.system_setup = true;
+      }
+      if (res == "three_city") {
+        this.three_city = true;
       }
     });
     if (this.$route.path == "/holistic_analysis") {
@@ -217,6 +256,20 @@ export default {
       this.$route.path == "/operation_Journal_add"
     ) {
       this.activemenu = "13";
+    } else if (
+      this.$route.path == "/new_cbd_one" ||
+      this.$route.path == "/new_cbd_two" ||
+      this.$route.path == "/new_cbd_three"
+    ) {
+      this.activemenu = "one";
+    } else if (
+      this.$route.path == "/new_cbd_history1" ||
+      this.$route.path == "/new_cbd_history2" ||
+      this.$route.path == "/new_cbd_history3"
+    ) {
+      this.activemenu = "two";
+    } else if (this.$route.path == "/three_city") {
+      this.activemenu = "three";
     }
   },
   methods: {
@@ -224,75 +277,87 @@ export default {
       console.log(data);
       if (data == 1) {
         this.$router.replace({
-          path: "/holistic_analysis"
+          path: "/holistic_analysis",
         });
       } else if (data == 2) {
         this.$router.replace({
-          path: "/new_holistic_analysis"
+          path: "/new_holistic_analysis",
         });
       } else if (data == 3) {
         this.$router.replace({
-          path: "/operation_analysis"
+          path: "/operation_analysis",
         });
       } else if (data == 4) {
         this.$router.replace({
-          path: "/car_administration"
+          path: "/car_administration",
         });
       } else if (data == 5) {
         this.$router.replace({
-          path: "/one_administration"
+          path: "/one_administration",
         });
       } else if (data == 6) {
         this.$router.replace({
-          path: "/induce_administration"
+          path: "/induce_administration",
         });
       } else if (data == 7) {
         this.$router.replace({
-          path: "/account_Jurisdiction"
+          path: "/account_Jurisdiction",
         });
       } else if (data == 8) {
         this.$router.replace({
-          path: "/role_Jurisdiction"
+          path: "/role_Jurisdiction",
         });
       } else if (data == 9) {
         this.$router.replace({
-          path: "/system_Journal"
+          path: "/system_Journal",
         });
       } else if (data == 10) {
         this.$router.replace({
-          path: "/system_setup"
+          path: "/system_setup",
         });
       } else if (data == 11) {
         this.$router.replace({
-          path: "/menu_Jurisdiction"
+          path: "/menu_Jurisdiction",
         });
       } else if (data == 12) {
         this.$router.replace({
-          path: "/equipment_Journal"
+          path: "/equipment_Journal",
         });
       } else if (data == 13) {
         this.$router.replace({
-          path: "/operation_Journal"
+          path: "/operation_Journal",
         });
       } else if (data == 14) {
         this.$router.replace({
-          path: "/car_administrations"
+          path: "/car_administrations",
         });
       } else if (data == 15) {
         this.$router.replace({
-          path: "/newyard_analysis"
+          path: "/newyard_analysis",
         });
       } else if (data == 16) {
         this.$router.replace({
-          path: "/operation_record"
+          path: "/operation_record",
+        });
+      } else if (data == "one") {
+        this.$router.replace({
+          path: "/new_cbd_one",
+        });
+      } else if (data == "two") {
+        this.$router.replace({
+          path: "/new_cbd_history1",
+        });
+      } else if (data == "three") {
+        this.$router.replace({
+          path: "/three_city",
         });
       } else {
         this.$router.replace({
-          path: "/noauthority"
+          path: "/noauthority",
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

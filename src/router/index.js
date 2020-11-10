@@ -28,6 +28,14 @@ import Operation_Journal_add from '@/view/Journal/operation_Journal_add'
 import Operation_record from '@/view/Journal/operation_record'
 import Operation_record_details from '@/view/Journal/operation_record_details'
 import System_setup from '@/view/Setup/system_setup'
+import new_cbd_one from '@/view/analysis/new_cbd_one'
+import new_cbd_two from '@/view/analysis/new_cbd_two'
+import new_cbd_three from '@/view/analysis/new_cbd_three'
+import new_cbd_history1 from '@/view/analysis/new_cbd_history1'
+import new_cbd_history2 from '@/view/analysis/new_cbd_history2'
+import new_cbd_history3 from '@/view/analysis/new_cbd_history3'
+import three_city from '@/view/analysis/three_city'
+
 
 Vue.use(Router)
 
@@ -52,6 +60,9 @@ export default new Router({
       name: 'index',
       component: Index,
       children: [{
+          path: '/three_city',
+          component: three_city
+        }, {
           path: '/new_holistic_analysis',
           component: New_holistic_analysis
         }, {
@@ -153,6 +164,30 @@ export default new Router({
         {
           path: '/noauthority',
           component: Noauthority
+        },
+        {
+          path: '/new_cbd_one',
+          component: new_cbd_one
+        },
+        {
+          path: '/new_cbd_two',
+          component: new_cbd_two
+        },
+        {
+          path: '/new_cbd_three',
+          component: new_cbd_three
+        },
+        {
+          path: '/new_cbd_history1',
+          component: new_cbd_history1
+        },
+        {
+          path: '/new_cbd_history2',
+          component: new_cbd_history2
+        },
+        {
+          path: '/new_cbd_history3',
+          component: new_cbd_history3
         }
       ]
     },

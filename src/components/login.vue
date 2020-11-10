@@ -40,13 +40,11 @@ export default {
       password: "",
       loading: false,
       img: "../assets/images/kong@3x.png",
-      show: true
+      show: true,
+      number: 3
     };
   },
   created() {
-    // console.log('created')
-    // console.log(url.url.login)
-    // console.log(axios)
     sessionStorage.setItem("logout_data", "true");
     sessionStorage.setItem("data", " ");
   },
@@ -100,24 +98,31 @@ export default {
                     method: "get"
                   })
                   .then(res => {
-                    console.log(res);
                     if (res.status == 200) {
-                      sessionStorage.setItem("name", this.username);
-                      sessionStorage.setItem(
-                        "menuSet",
-                        JSON.stringify(res.data)
-                      );
-                      res.data.map(item => {
-                        if (item == "car_administration") {
+                      localStorage.setItem("name", this.username);
+                      localStorage.setItem("menuSet", JSON.stringify(res.data));
+                      for (var i = 0; i < res.data.length; i++) {
+                        console.log(res.data[i]);
+                        if (res.data[i] == "car_administration") {
+                          this.number = 2;
                           this.$router.push({
                             path: "/car_administration"
                           });
-                        } else if (item == "car_administrations") {
-                          this.$router.push({
-                            path: "/car_administrations"
-                          });
+                          return;
                         }
-                      });
+                        // else if (res.data[i] == "car_administrations") {
+                        //   this.number = 2;
+                        //   this.$router.push({
+                        //     path: "/car_administrations"
+                        //   });
+                        //   return;
+                        // }
+                      }
+                      if (this.number != 2) {
+                        this.$router.push({
+                          path: "/" + res.data[0]
+                        });
+                      }
                     }
                   });
               } else {
@@ -141,7 +146,6 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  /* border: 1px solid red; */
 }
 .title {
   width: 96%;
@@ -152,7 +156,6 @@ export default {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  /* border: 1px solid red; */
   position: fixed;
   top: 3%;
   left: 1%;
@@ -174,7 +177,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
 }
 .title_text {
   width: 100%;
@@ -191,7 +193,6 @@ export default {
   text-align: center;
   padding-top: 60px;
   padding-bottom: 50px;
-  /* border: 1px solid red; */
 }
 .btn {
   width: 70%;

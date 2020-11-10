@@ -71,7 +71,7 @@ export default {
     };
   },
   created() {
-    this.name = sessionStorage.getItem("name");
+    this.name = localStorage.getItem("name");
     // if (sessionStorage.getItem("loging") != "true") {
     //   window.location.href = window.location.pathname + "#/";
     // }
@@ -161,6 +161,7 @@ export default {
               this.$router.replace({ path: "/" });
               sessionStorage.setItem("loging", "false");
               sessionStorage.setItem("token", "");
+              localStorage.clear();
               this.$Notice.success({
                 title: "退出成功",
                 desc: ""
