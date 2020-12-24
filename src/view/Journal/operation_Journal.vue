@@ -292,50 +292,61 @@
     <div class="search">
       <div class="top">
         <div class="input1">
-          <div class="text">任务类型</div>：
-          <i-select v-model="taskType" style="width:200px;" clearable>
+          <div class="text">任务类型</div>
+          ：
+          <i-select v-model="taskType" style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in taskTypes"
+              v-for="(item, index) in taskTypes"
               :key="index"
               :value="item.value"
-            >{{ item.label }}</i-option>
+              >{{ item.label }}</i-option
+            >
           </i-select>
         </div>
         <div class="input1">
-          <div class="text">任务状态</div>：
-          <i-select v-model="taskStatus" style="width:200px;" clearable>
+          <div class="text">任务状态</div>
+          ：
+          <i-select v-model="taskStatus" style="width: 200px" clearable>
             <i-option
-              v-for="(item,index) in taskStatus1"
+              v-for="(item, index) in taskStatus1"
               :key="index"
               :value="item.value"
-            >{{ item.label }}</i-option>
+              >{{ item.label }}</i-option
+            >
           </i-select>
         </div>
         <div class="input1">
-          <div class="text">负责人</div>：
-          <i-input v-model="header" placeholder="负责人姓名" style="width:200px;"></i-input>
+          <div class="text">负责人</div>
+          ：
+          <i-input
+            v-model="header"
+            placeholder="负责人姓名"
+            style="width: 200px"
+          ></i-input>
         </div>
         <div class="input2">
-          <div class="text">录入时间段</div>：
+          <div class="text">录入时间段</div>
+          ：
           <DatePicker
             type="daterange"
             format="yyyy-MM-dd"
             size="default"
             v-model="times2"
             placeholder="请选择要查询的时间"
-            style="width:200px;font-size:0.6vw;"
+            style="width: 200px; font-size: 0.6vw"
             :options="options1"
           ></DatePicker>
         </div>
         <div class="input2">
-          <div class="text">起始时间段</div>：
+          <div class="text">起始时间段</div>
+          ：
           <DatePicker
             type="daterange"
             format="yyyy-MM-dd"
             size="default"
             v-model="times1"
             placeholder="请选择要查询的时间"
-            style="width:200px;font-size:0.6vw;"
+            style="width: 200px; font-size: 0.6vw"
             :options="options1"
           ></DatePicker>
         </div>
@@ -351,7 +362,7 @@
 
     <div class="table">
       <Table
-        style="border:none;"
+        style="border: none"
         highlight-row
         ref="currentRowTable"
         :no-data-text="loadingText ? loadingText : '暂无数据'"
@@ -375,18 +386,29 @@
         <i-input
           @input="number"
           :value="numbers"
-          style="width: 50px;margin-left:5px;margin-right:5px;"
+          style="width: 50px; margin-left: 5px; margin-right: 5px"
           placeholder="1"
         ></i-input>
         <div>页</div>
-        <i-button class="jump" type="primary" style="margin-left:20px;" @click="jump">跳转</i-button>
+        <i-button
+          class="jump"
+          type="primary"
+          style="margin-left: 20px"
+          @click="jump"
+          >跳转</i-button
+        >
       </div>
     </div>
     <div class="modules_delete" v-if="show_delete">
       <div class="contentes_delete">
         <div class="content_top_delete">确定删除？</div>
         <div class="content_bottom_delete">
-          <Button class="success_delete" :loading="loading_delete" @click="success_delete">确定</Button>
+          <Button
+            class="success_delete"
+            :loading="loading_delete"
+            @click="success_delete"
+            >确定</Button
+          >
           <Button class="canceles_delete" @click="canceles_delete">取消</Button>
         </div>
       </div>
@@ -407,7 +429,7 @@ export default {
       options1: {
         disabledDate(date) {
           return date && date.valueOf() > Date.now();
-        }
+        },
       },
       loadinges: false,
       loadingText: "",
@@ -417,42 +439,42 @@ export default {
         start: 0,
         pageSize: 20,
         filterJson: {
-          filters: []
-        }
+          filters: [],
+        },
       },
       taskType: "", //任务类别
       taskTypes: [
         {
           value: "1",
-          label: "巡检"
+          label: "巡检",
         },
         {
           value: "2",
-          label: "维修"
+          label: "维修",
         },
         {
           value: "3",
-          label: "演示"
-        }
+          label: "演示",
+        },
       ],
       taskStatus: "", //任务状态
       taskStatus1: [
         {
           value: "1",
-          label: "未分配"
+          label: "未分配",
         },
         {
           value: "2",
-          label: "进行中"
+          label: "进行中",
         },
         {
           value: "3",
-          label: "已完成"
+          label: "已完成",
         },
         {
           value: "4",
-          label: "已取消"
-        }
+          label: "已取消",
+        },
       ],
       columns: [
         {
@@ -464,7 +486,7 @@ export default {
           render: (h, params) => {
             let data = url.TT(params.row.createTime);
             return h("span", data);
-          }
+          },
         },
         {
           title: "起始时间",
@@ -475,7 +497,7 @@ export default {
           render: (h, params) => {
             let data = url.TT(params.row.startTime);
             return h("span", data);
-          }
+          },
         },
         {
           title: "类别",
@@ -498,7 +520,7 @@ export default {
                 ? "演示"
                 : ""
             );
-          }
+          },
         },
         // {
         //   title: "状态",
@@ -540,41 +562,41 @@ export default {
                 ? "已取消"
                 : ""
             );
-          }
+          },
         },
         {
           title: "负责人",
           align: "center",
           //   sortable: 'custom',
           key: "header",
-          minWidth: 150
+          minWidth: 150,
         },
         {
           title: "人数",
           align: "center",
           minWidth: 100,
-          key: "personNum"
+          key: "personNum",
         },
         {
           title: "工时",
           align: "center",
           //   sortable: 'custom',
           key: "manHour",
-          minWidth: 100
+          minWidth: 100,
         },
         {
           title: "任务名称",
           align: "center",
           //   sortable: 'custom',
           key: "taskName",
-          minWidth: 150
+          minWidth: 150,
         },
         {
           title: "录入人",
           align: "center",
           //   sortable: 'custom',
           key: "operater",
-          minWidth: 150
+          minWidth: 150,
         },
         {
           title: "操作",
@@ -593,13 +615,13 @@ export default {
                     size: 26,
                     cursor: "pointer",
                     marginRight: "5px",
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.edit(parking);
-                    }
-                  }
+                    },
+                  },
                 },
                 "编辑"
               ),
@@ -608,20 +630,20 @@ export default {
                 {
                   style: {
                     size: 26,
-                    cursor: "pointer"
+                    cursor: "pointer",
                   },
                   on: {
                     click: () => {
                       this.delete(parking.id);
-                    }
-                  }
+                    },
+                  },
                 },
                 "删除"
-              )
+              ),
             ]);
             return menu;
-          }
-        }
+          },
+        },
       ],
       conditions: {
         condition: {
@@ -629,15 +651,17 @@ export default {
           header: "",
           startDate: "",
           taskStatus: "",
-          taskType: ""
+          taskType: "",
+          createStartDate: "",
+          createEndDate: "",
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       header: "", //负责人
       times2: "", //录入时间段
       times1: "", //起始时间段
-      datas: { total: 0, list: [], loading: false }
+      datas: { total: 0, list: [], loading: false },
     };
   },
   created() {
@@ -674,14 +698,21 @@ export default {
         this.conditions.condition.startDate = "";
         this.conditions.condition.endDate = "";
       }
+      if (this.times2[0] != "" && this.times2[0]) {
+        this.conditions.condition.createStartDate = url.time(this.times2[0]);
+        this.conditions.condition.createEndDate = url.time(this.times2[1]);
+      } else {
+        this.conditions.condition.createStartDate = "";
+        this.conditions.condition.createEndDate = "";
+      }
       console.log(this.conditions);
       axios1
         .request({
           url: url.url.search_task_info_list,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.numbers = 1;
           this.pages = Number(1);
@@ -705,9 +736,9 @@ export default {
         .request({
           url: url.url.search_task_info_list,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.data.list.length == 0) {
             this.loadingText = "";
@@ -754,9 +785,9 @@ export default {
         .request({
           url: url.url.search_task_info_list,
           data: this.conditions,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.pages = Number(this.numbers);
           if (res.data.data.list.length == 0) {
@@ -770,7 +801,7 @@ export default {
     },
     but1() {
       this.$router.push({
-        path: "/operation_Journal_add"
+        path: "/operation_Journal_add",
       });
     },
     //编辑任务
@@ -779,8 +810,8 @@ export default {
       this.$router.push({
         path: "/operation_Journal_add",
         query: {
-          id: data.id
-        }
+          id: data.id,
+        },
       });
     },
     //删除任务
@@ -790,22 +821,22 @@ export default {
         .request({
           url: url.url.delete_task_info,
           params: {
-            id: this.id_delete
+            id: this.id_delete,
           },
-          method: "delete"
+          method: "delete",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code == 200) {
             this.$Notice.success({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
             this.sear();
           } else {
             this.$Notice.error({
               title: "系统提示",
-              desc: res.data.message
+              desc: res.data.message,
             });
           }
           this.loading_delete = false;
@@ -824,7 +855,7 @@ export default {
       console.log(id);
       this.show_delete = true;
       this.id_delete = id;
-    }
-  }
+    },
+  },
 };
 </script>

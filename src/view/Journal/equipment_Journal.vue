@@ -248,40 +248,67 @@
     <div class="search">
       <div class="top">
         <div class="input2">
-          <div class="text1">时间</div>：
+          <div class="text1">时间</div>
+          ：
           <!-- <Input style="width:300px;" v-model="tableList.condition.accountName" /> -->
           <DatePicker
             type="daterange"
             placement="bottom-start"
             placeholder="请选择要查询的时间"
             :options="options4"
-            style="width: 100%;font-size:0.7vw;"
+            style="width: 100%; font-size: 0.7vw"
             @on-change="change"
           ></DatePicker>
         </div>
         <div class="input1">
-          <div class="text">设备类型</div>：
-          <i-select v-model="tableList.condition.deviceType" style="width:100%" clearable>
+          <div class="text">设备类型</div>
+          ：
+          <i-select
+            v-model="tableList.condition.deviceType"
+            style="width: 100%"
+            clearable
+          >
             <i-option
-              v-for="(item,index) in deviceType"
+              v-for="(item, index) in deviceType"
               :key="index"
               :value="item.id"
-            >{{ item.value }}</i-option>
+              >{{ item.value }}</i-option
+            >
           </i-select>
         </div>
         <div class="input1">
-          <div class="text">日志类型</div>：
-          <i-select v-model="tableList.condition.onlineStatus" style="width:100%" clearable>
+          <div class="text">日志类型</div>
+          ：
+          <i-select
+            v-model="tableList.condition.onlineStatus"
+            style="width: 100%"
+            clearable
+          >
             <i-option
-              v-for="(item,index) in onlineStatus"
+              v-for="(item, index) in onlineStatus"
               :key="index"
               :value="item.id"
-            >{{ item.value }}</i-option>
+              >{{ item.value }}</i-option
+            >
           </i-select>
         </div>
         <div class="input2">
-          <div class="text2">设备说明</div>：
-          <Input style="width:100%;" v-model="tableList.condition.remark" placeholder="请输入设备说明" />
+          <div class="text2">设备说明</div>
+          ：
+          <Input
+            style="width: 100%"
+            v-model="tableList.condition.remark"
+            placeholder="请输入设备说明"
+          />
+        </div>
+        <div class="input2">
+          <div class="text2">设备编码</div>
+          ：
+          <Input
+            style="width: 100%"
+            v-model="tableList.condition.deviceCode"
+            placeholder="请输入设备编码"
+          />
         </div>
       </div>
       <div class="bottom">
@@ -318,11 +345,11 @@
         <Input
           @input="number"
           :value="numbers"
-          style="width: 50px;margin-left:5px;margin-right:5px;"
+          style="width: 50px; margin-left: 5px; margin-right: 5px"
           placeholder="1"
         />
         <div>页</div>
-        <Button style="margin-left:20px;" @click="jump">跳转</Button>
+        <Button style="margin-left: 20px" @click="jump">跳转</Button>
       </div>
     </div>
 
@@ -331,8 +358,10 @@
       <Spin fix size="large" v-if="spinShow"></Spin>
     </div>
     <Modal v-model="modal10" :closable="false">
-      <p class="ellipsis" v-for="(item,index) in module_ellipsis" :key="index">{{item}}</p>
-      <div slot="footer" style="width:100%;height:35px;textAlign:center;">
+      <p class="ellipsis" v-for="(item, index) in module_ellipsis" :key="index">
+        {{ item }}
+      </p>
+      <div slot="footer" style="width: 100%; height: 35px; textalign: center">
         <button class="close" @click="del">关闭</button>
       </div>
     </Modal>
@@ -348,27 +377,27 @@ export default {
       options4: {
         disabledDate(date) {
           return date && date.valueOf() > Date.now();
-        }
+        },
       },
       deviceType: [
         {
           id: 1,
-          value: "一体机"
+          value: "一体机",
         },
         {
           id: 2,
-          value: "诱导屏"
-        }
+          value: "诱导屏",
+        },
       ],
       onlineStatus: [
         {
           id: 1,
-          value: "在线"
+          value: "在线",
         },
         {
           id: 0,
-          value: "离线"
-        }
+          value: "离线",
+        },
       ],
       module_ellipsis: [],
       modal10: false,
@@ -386,10 +415,11 @@ export default {
           endTime: "", //结束时间
           onlineStatus: "", //状态
           remark: "", //设备备注信息
-          startTime: "" //开始时间
+          startTime: "", //开始时间
+          deviceCode: "", //设备编码
         },
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       data: "",
       show: "",
@@ -410,7 +440,7 @@ export default {
             }
             // console.log(parking.loginTime);
             return h("div", {}, parking.createTime);
-          }
+          },
         },
         {
           title: "设备类型",
@@ -429,28 +459,28 @@ export default {
                 ? "诱导屏"
                 : "";
             return h("div", {}, data);
-          }
+          },
         },
         {
           title: "设备编号",
           align: "center",
           //   sortable: 'custom',
           key: "deviceCode",
-          minWidth: 150
+          minWidth: 150,
         },
         {
           title: "厂商ID",
           align: "center",
           //   sortable: 'custom',
           key: "factoryId",
-          minWidth: 70
+          minWidth: 70,
         },
         {
           title: "运营商",
           align: "center",
           //   sortable: 'custom',
           key: "operators",
-          minWidth: 70
+          minWidth: 70,
         },
         {
           title: "日志类型",
@@ -470,17 +500,17 @@ export default {
                 : "";
             // console.log(parking.loginTime);
             return h("div", {}, data);
-          }
+          },
         },
         {
           title: "设备说明",
           align: "center",
           //   sortable: 'custom',
           key: "remark",
-          minWidth: 220
-        }
+          minWidth: 220,
+        },
       ],
-      data: { total: 0, list: [], loading: true }
+      data: { total: 0, list: [], loading: true },
     };
   },
   created() {
@@ -488,7 +518,7 @@ export default {
     this.list();
   },
   mounted() {
-    this.$root.event.$on("logout", res => {
+    this.$root.event.$on("logout", (res) => {
       this.show = res;
     });
   },
@@ -504,9 +534,9 @@ export default {
         .request({
           url: url.url.search_device,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -522,8 +552,8 @@ export default {
     change(date) {
       console.log(date);
       if (date[0] != "") {
-        this.tableList.condition.startTime = date[0] + " 23:59:59";
-        this.tableList.condition.endTime = date[1] + " 00:00:00";
+        this.tableList.condition.startTime = date[0] + " 00:00:00";
+        this.tableList.condition.endTime = date[1] + " 23:59:59";
       } else {
         this.tableList.condition.startTime = date[0];
         this.tableList.condition.endTime = date[1];
@@ -543,9 +573,9 @@ export default {
         .request({
           url: url.url.search_device,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           this.numbers = data;
           if (res.data.data.list.length == 0) {
@@ -593,9 +623,9 @@ export default {
         .request({
           url: url.url.search_device,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           that.pages = Number(this.numbers);
           console.log(res);
           that.spinShow = false;
@@ -616,9 +646,9 @@ export default {
       axios
         .request({
           url: url.url.logout,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.logout == true) {
             sessionStorage.setItem("logout", 1);
@@ -627,7 +657,7 @@ export default {
           } else {
             this.$Notice.error({
               title: res.data.message,
-              desc: ""
+              desc: "",
             });
           }
         });
@@ -648,9 +678,9 @@ export default {
         .request({
           url: url.url.search_device,
           params: this.tableList,
-          method: "post"
+          method: "post",
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           that.spinShow = false;
           if (res.data.data.list.length == 0) {
@@ -662,7 +692,7 @@ export default {
           this.numbers = 1;
           this.loadinges = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
